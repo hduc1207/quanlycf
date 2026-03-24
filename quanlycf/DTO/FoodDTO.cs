@@ -25,6 +25,10 @@ namespace QuanLyQuanCafe.DTO
             this.Price = (decimal)row["Price"];
             this.Size = row["Size"] == DBNull.Value ? "" : row["Size"].ToString();
         }
+        public override string ToString()
+        {
+            return this.FoodName;
+        }
     }
 }
 

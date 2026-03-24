@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyQuanCafe.DAO;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -20,6 +21,10 @@ namespace QuanLyQuanCafe.DTO
             this.TableID = (int)row["TableId"];
             this.TableName = row["TableName"].ToString();
             this.TableStatus = row["TableStatus"].ToString();
+        }
+        public override string ToString()
+        {
+            return this.TableName;
         }
     }
 }

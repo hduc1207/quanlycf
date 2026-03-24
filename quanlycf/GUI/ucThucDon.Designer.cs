@@ -1,4 +1,4 @@
-﻿namespace quanlycf.GUI
+﻿namespace QuanLyQuanCafe.GUI
 {
     partial class ucThucDon
     {
@@ -57,6 +57,7 @@
             gridView1.OptionsFind.AlwaysVisible = true;
             gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             gridView1.OptionsView.ShowGroupPanel = false;
+            gridView1.RowUpdated += gridView1_RowUpdated;
             // 
             // panelControl1
             // 
@@ -77,6 +78,7 @@
             simpleButton2.Size = new System.Drawing.Size(80, 20);
             simpleButton2.TabIndex = 1;
             simpleButton2.Text = "Refresh";
+            simpleButton2.Click += btnLamMoi_Click;
             // 
             // simpleButton1
             // 
@@ -87,6 +89,7 @@
             simpleButton1.Size = new System.Drawing.Size(80, 20);
             simpleButton1.TabIndex = 0;
             simpleButton1.Text = "Xóa";
+            simpleButton1.Click += btnXoa_Click;
             // 
             // ucThucDon
             // 

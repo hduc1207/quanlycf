@@ -19,5 +19,9 @@ namespace QuanLyQuanCafe.DTO
             this.CategoryId = (int)row["CategoryId"];
             this.CategoryName = row["CategoryName"].ToString();
         }
+        public override string ToString()
+        {
+            return this.CategoryName;
+        }
     }
 }

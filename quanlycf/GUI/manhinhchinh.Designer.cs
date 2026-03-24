@@ -1,4 +1,4 @@
-﻿namespace quanlycf.GUI
+﻿namespace QuanLyQuanCafe.GUI
 {
     partial class manhinhchinh
     {
@@ -35,19 +35,19 @@
             gridControl1 = new DevExpress.XtraGrid.GridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            btnThanhToan = new DevExpress.XtraEditors.SimpleButton();
+            txtTongTien = new DevExpress.XtraEditors.TextEdit();
             labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
+            spnGiamGia = new DevExpress.XtraEditors.SpinEdit();
             labelControl2 = new DevExpress.XtraEditors.LabelControl();
             lbldangchon = new DevExpress.XtraEditors.LabelControl();
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            comboBoxEdit3 = new DevExpress.XtraEditors.ComboBoxEdit();
-            comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
-            simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            comboBoxEdit2 = new DevExpress.XtraEditors.ComboBoxEdit();
-            comboBoxEdit4 = new DevExpress.XtraEditors.ComboBoxEdit();
-            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            cbbSIze = new DevExpress.XtraEditors.ComboBoxEdit();
+            ccbdanhmuc = new DevExpress.XtraEditors.ComboBoxEdit();
+            btnChuyenBan = new DevExpress.XtraEditors.SimpleButton();
+            cbbdouong = new DevExpress.XtraEditors.ComboBoxEdit();
+            cbbBan = new DevExpress.XtraEditors.ComboBoxEdit();
+            btnThem = new DevExpress.XtraEditors.SimpleButton();
             flpDanhSachBan = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel1).BeginInit();
@@ -59,14 +59,14 @@
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl2).BeginInit();
             panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)spinEdit1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtTongTien.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)spnGiamGia.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
             panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit3.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit4.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cbbSIze.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ccbdanhmuc.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cbbdouong.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cbbBan.Properties).BeginInit();
             SuspendLayout();
             // 
             // splitContainerControl1
@@ -109,10 +109,10 @@
             // 
             // panelControl2
             // 
-            panelControl2.Controls.Add(simpleButton3);
-            panelControl2.Controls.Add(textEdit1);
+            panelControl2.Controls.Add(btnThanhToan);
+            panelControl2.Controls.Add(txtTongTien);
             panelControl2.Controls.Add(labelControl3);
-            panelControl2.Controls.Add(spinEdit1);
+            panelControl2.Controls.Add(spnGiamGia);
             panelControl2.Controls.Add(labelControl2);
             panelControl2.Controls.Add(lbldangchon);
             panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -121,20 +121,21 @@
             panelControl2.Size = new System.Drawing.Size(595, 80);
             panelControl2.TabIndex = 8;
             // 
-            // simpleButton3
+            // btnThanhToan
             // 
-            simpleButton3.Location = new System.Drawing.Point(433, 23);
-            simpleButton3.Name = "simpleButton3";
-            simpleButton3.Size = new System.Drawing.Size(118, 36);
-            simpleButton3.TabIndex = 5;
-            simpleButton3.Text = "Thanh toán";
+            btnThanhToan.Location = new System.Drawing.Point(433, 23);
+            btnThanhToan.Name = "btnThanhToan";
+            btnThanhToan.Size = new System.Drawing.Size(118, 36);
+            btnThanhToan.TabIndex = 5;
+            btnThanhToan.Text = "Thanh toán";
+            btnThanhToan.Click += btnThanhToan_Click;
             // 
-            // textEdit1
+            // txtTongTien
             // 
-            textEdit1.Location = new System.Drawing.Point(334, 30);
-            textEdit1.Name = "textEdit1";
-            textEdit1.Size = new System.Drawing.Size(84, 23);
-            textEdit1.TabIndex = 4;
+            txtTongTien.Location = new System.Drawing.Point(334, 30);
+            txtTongTien.Name = "txtTongTien";
+            txtTongTien.Size = new System.Drawing.Size(84, 23);
+            txtTongTien.TabIndex = 4;
             // 
             // labelControl3
             // 
@@ -147,15 +148,15 @@
             labelControl3.Text = "Giảm giá:";
             labelControl3.Click += labelControl3_Click;
             // 
-            // spinEdit1
+            // spnGiamGia
             // 
-            spinEdit1.EditValue = new decimal(new int[] { 0, 0, 0, 0 });
-            spinEdit1.Location = new System.Drawing.Point(231, 29);
-            spinEdit1.Name = "spinEdit1";
-            spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            spinEdit1.Size = new System.Drawing.Size(89, 24);
-            spinEdit1.TabIndex = 2;
-            spinEdit1.EditValueChanged += spinEdit1_EditValueChanged;
+            spnGiamGia.EditValue = new decimal(new int[] { 0, 0, 0, 0 });
+            spnGiamGia.Location = new System.Drawing.Point(231, 29);
+            spnGiamGia.Name = "spnGiamGia";
+            spnGiamGia.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            spnGiamGia.Size = new System.Drawing.Size(89, 24);
+            spnGiamGia.TabIndex = 2;
+            spnGiamGia.EditValueChanged += spinEdit1_EditValueChanged;
             // 
             // labelControl2
             // 
@@ -175,7 +176,7 @@
             lbldangchon.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             lbldangchon.Appearance.Options.UseFont = true;
             lbldangchon.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            lbldangchon.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("labelControl1.ImageOptions.SvgImage");
+            lbldangchon.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("lbldangchon.ImageOptions.SvgImage");
             lbldangchon.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
             lbldangchon.Location = new System.Drawing.Point(39, 6);
             lbldangchon.Name = "lbldangchon";
@@ -185,65 +186,72 @@
             // 
             // panelControl1
             // 
-            panelControl1.Controls.Add(comboBoxEdit3);
-            panelControl1.Controls.Add(comboBoxEdit1);
-            panelControl1.Controls.Add(simpleButton2);
-            panelControl1.Controls.Add(comboBoxEdit2);
-            panelControl1.Controls.Add(comboBoxEdit4);
-            panelControl1.Controls.Add(simpleButton1);
+            panelControl1.Controls.Add(cbbSIze);
+            panelControl1.Controls.Add(ccbdanhmuc);
+            panelControl1.Controls.Add(btnChuyenBan);
+            panelControl1.Controls.Add(cbbdouong);
+            panelControl1.Controls.Add(cbbBan);
+            panelControl1.Controls.Add(btnThem);
             panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             panelControl1.Location = new System.Drawing.Point(0, 0);
             panelControl1.Name = "panelControl1";
             panelControl1.Size = new System.Drawing.Size(595, 80);
             panelControl1.TabIndex = 7;
             // 
-            // comboBoxEdit3
+            // cbbSIze
             // 
-            comboBoxEdit3.Location = new System.Drawing.Point(334, 29);
-            comboBoxEdit3.Name = "comboBoxEdit3";
-            comboBoxEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit3.Size = new System.Drawing.Size(77, 23);
-            comboBoxEdit3.TabIndex = 3;
+            cbbSIze.EditValue = "--Size--";
+            cbbSIze.Location = new System.Drawing.Point(334, 29);
+            cbbSIze.Name = "cbbSIze";
+            cbbSIze.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cbbSIze.Size = new System.Drawing.Size(77, 23);
+            cbbSIze.TabIndex = 3;
             // 
-            // comboBoxEdit1
+            // ccbdanhmuc
             // 
-            comboBoxEdit1.Location = new System.Drawing.Point(39, 13);
-            comboBoxEdit1.Name = "comboBoxEdit1";
-            comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit1.Size = new System.Drawing.Size(101, 23);
-            comboBoxEdit1.TabIndex = 0;
+            ccbdanhmuc.EditValue = "--Loại--";
+            ccbdanhmuc.Location = new System.Drawing.Point(39, 13);
+            ccbdanhmuc.Name = "ccbdanhmuc";
+            ccbdanhmuc.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            ccbdanhmuc.Size = new System.Drawing.Size(101, 23);
+            ccbdanhmuc.TabIndex = 0;
+            ccbdanhmuc.SelectedIndexChanged += ccbdanhmuc_SelectedIndexChanged;
             // 
-            // simpleButton2
+            // btnChuyenBan
             // 
-            simpleButton2.Location = new System.Drawing.Point(445, 13);
-            simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new System.Drawing.Size(94, 23);
-            simpleButton2.TabIndex = 5;
-            simpleButton2.Text = "Chuyển";
+            btnChuyenBan.Location = new System.Drawing.Point(445, 13);
+            btnChuyenBan.Name = "btnChuyenBan";
+            btnChuyenBan.Size = new System.Drawing.Size(94, 23);
+            btnChuyenBan.TabIndex = 5;
+            btnChuyenBan.Text = "Chuyển";
+            btnChuyenBan.Click += btnChuyenBan_Click;
             // 
-            // comboBoxEdit2
+            // cbbdouong
             // 
-            comboBoxEdit2.Location = new System.Drawing.Point(39, 42);
-            comboBoxEdit2.Name = "comboBoxEdit2";
-            comboBoxEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit2.Size = new System.Drawing.Size(101, 23);
-            comboBoxEdit2.TabIndex = 1;
+            cbbdouong.EditValue = "--Đồ uống--";
+            cbbdouong.Location = new System.Drawing.Point(39, 42);
+            cbbdouong.Name = "cbbdouong";
+            cbbdouong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cbbdouong.Size = new System.Drawing.Size(101, 23);
+            cbbdouong.TabIndex = 1;
             // 
-            // comboBoxEdit4
+            // cbbBan
             // 
-            comboBoxEdit4.Location = new System.Drawing.Point(445, 42);
-            comboBoxEdit4.Name = "comboBoxEdit4";
-            comboBoxEdit4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit4.Size = new System.Drawing.Size(94, 23);
-            comboBoxEdit4.TabIndex = 4;
+            cbbBan.EditValue = "--Bàn--";
+            cbbBan.Location = new System.Drawing.Point(445, 42);
+            cbbBan.Name = "cbbBan";
+            cbbBan.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cbbBan.Size = new System.Drawing.Size(94, 23);
+            cbbBan.TabIndex = 4;
             // 
-            // simpleButton1
+            // btnThem
             // 
-            simpleButton1.Location = new System.Drawing.Point(190, 25);
-            simpleButton1.Name = "simpleButton1";
-            simpleButton1.Size = new System.Drawing.Size(93, 27);
-            simpleButton1.TabIndex = 2;
-            simpleButton1.Text = "Thêm";
+            btnThem.Location = new System.Drawing.Point(190, 25);
+            btnThem.Name = "btnThem";
+            btnThem.Size = new System.Drawing.Size(93, 27);
+            btnThem.TabIndex = 2;
+            btnThem.Text = "Thêm";
+            btnThem.Click += btnThem_Click;
             // 
             // flpDanhSachBan
             // 
@@ -273,14 +281,14 @@
             ((System.ComponentModel.ISupportInitialize)panelControl2).EndInit();
             panelControl2.ResumeLayout(false);
             panelControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)spinEdit1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtTongTien.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)spnGiamGia.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).EndInit();
             panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit3.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit4.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cbbSIze.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ccbdanhmuc.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cbbdouong.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cbbBan.Properties).EndInit();
             ResumeLayout(false);
         }
 
@@ -288,12 +296,12 @@
 
         private DevExpress.XtraBars.Alerter.AlertControl alertControl1;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit2;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit4;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit3;
+        private DevExpress.XtraEditors.SimpleButton btnThem;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbdouong;
+        private DevExpress.XtraEditors.ComboBoxEdit ccbdanhmuc;
+        private DevExpress.XtraEditors.SimpleButton btnChuyenBan;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbBan;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbSIze;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.PanelControl panelControl2;
@@ -301,9 +309,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl lbldangchon;
         private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.SpinEdit spinEdit1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.SpinEdit spnGiamGia;
+        private DevExpress.XtraEditors.SimpleButton btnThanhToan;
+        private DevExpress.XtraEditors.TextEdit txtTongTien;
         private System.Windows.Forms.FlowLayoutPanel flpDanhSachBan;
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace quanlycf
+namespace QuanLyQuanCafe
 {
     internal static class Program
     {

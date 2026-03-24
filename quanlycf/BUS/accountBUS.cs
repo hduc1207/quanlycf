@@ -1,5 +1,6 @@
 ﻿using QuanLyQuanCafe.DAO;
-using System;
+using QuanLyQuanCafe.DTO;
+using System.Collections.Generic;
 
 namespace QuanLyQuanCafe.BUS
 {
@@ -13,14 +14,28 @@ namespace QuanLyQuanCafe.BUS
         }
         private AccountBUS() { }
 
-        // Hàm xử lý logic đăng nhập
-        public bool Login(string userName, string passWord)
+        // 1. Lấy danh sách
+        public List<AccountDTO> GetListAccount()
         {
-            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(passWord))
-            {
-                return false;
-            }
-            return AccountDAO.Instance.Login(userName, passWord);
+            return AccountDAO.Instance.GetListAccount();
+        }
+
+        // 2. Thêm mới (Đủ 5 tham số để chiều lòng cái Procedure của bạn)
+        public bool InsertAccount(string userName, string displayName, int type, string fullName, string phone)
+        {
+            return AccountDAO.Instance.InsertAccount(userName, displayName, type, fullName, phone);
+        }
+
+        // 3. Sửa thông tin (Gọi đúng hàm AdminUpdateAccount)
+        public bool AdminUpdateAccount(string userName, string displayName, int type)
+        {
+            return AccountDAO.Instance.AdminUpdateAccount(userName, displayName, type);
+        }
+
+        // 4. Xóa
+        public bool DeleteAccount(string userName)
+        {
+            return AccountDAO.Instance.DeleteAccount(userName);
         }
     }
 }

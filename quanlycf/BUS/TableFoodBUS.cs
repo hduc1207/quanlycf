@@ -20,5 +20,22 @@ namespace QuanLyQuanCafe.BUS
         {
             return TableFoodDAO.Instance.GetListTable();
         }
+        // Thêm bàn mới
+        public bool InsertTable(string name)
+        {
+            return QuanLyQuanCafe.DAO.TableFoodDAO.Instance.InsertTable(name);
+        }
+
+        // Sửa tên bàn
+        public bool UpdateTable(int id, string name)
+        {
+            return QuanLyQuanCafe.DAO.TableFoodDAO.Instance.UpdateTable(id, name);
+        }
+
+        // Xóa bàn
+        public bool DeleteTable(int id)
+        {
+            return QuanLyQuanCafe.DAO.TableFoodDAO.Instance.DeleteTable(id);
+        }
     }
 }

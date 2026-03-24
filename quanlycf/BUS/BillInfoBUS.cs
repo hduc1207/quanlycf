@@ -34,5 +34,9 @@ namespace QuanLyQuanCafe.BUS
         {
             return BillInfoDAO.Instance.DeleteBillInfo(billInfoId);
         }
+        public System.Data.DataTable GetListBillInfoByTable(int tableId)
+        {
+            return QuanLyQuanCafe.DAO.BillInfoDAO.Instance.GetListBillInfoByTable(tableId);
+        }
     }
  }

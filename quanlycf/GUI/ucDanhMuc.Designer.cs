@@ -1,4 +1,4 @@
-﻿namespace quanlycf.GUI
+﻿namespace QuanLyQuanCafe.GUI
 {
     partial class ucDanhMuc
     {
@@ -32,8 +32,8 @@
             gridControl1 = new DevExpress.XtraGrid.GridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            btnLamMoi = new DevExpress.XtraEditors.SimpleButton();
+            btnXoa = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
@@ -57,36 +57,39 @@
             gridView1.OptionsFind.AlwaysVisible = true;
             gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             gridView1.OptionsView.ShowGroupPanel = false;
+            gridView1.RowUpdated += gridView1_RowUpdated;
             // 
             // panelControl1
             // 
-            panelControl1.Controls.Add(simpleButton2);
-            panelControl1.Controls.Add(simpleButton1);
+            panelControl1.Controls.Add(btnLamMoi);
+            panelControl1.Controls.Add(btnXoa);
             panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             panelControl1.Location = new System.Drawing.Point(0, 0);
             panelControl1.Name = "panelControl1";
             panelControl1.Size = new System.Drawing.Size(1200, 40);
             panelControl1.TabIndex = 2;
             // 
-            // simpleButton2
+            // btnLamMoi
             // 
-            simpleButton2.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton2.ImageOptions.SvgImage");
-            simpleButton2.ImageOptions.SvgImageSize = new System.Drawing.Size(15, 15);
-            simpleButton2.Location = new System.Drawing.Point(96, 11);
-            simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new System.Drawing.Size(80, 20);
-            simpleButton2.TabIndex = 1;
-            simpleButton2.Text = "Refresh";
+            btnLamMoi.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnLamMoi.ImageOptions.SvgImage");
+            btnLamMoi.ImageOptions.SvgImageSize = new System.Drawing.Size(15, 15);
+            btnLamMoi.Location = new System.Drawing.Point(96, 11);
+            btnLamMoi.Name = "btnLamMoi";
+            btnLamMoi.Size = new System.Drawing.Size(80, 20);
+            btnLamMoi.TabIndex = 1;
+            btnLamMoi.Text = "Refresh";
+            btnLamMoi.Click += btnLamMoi_Click;
             // 
-            // simpleButton1
+            // btnXoa
             // 
-            simpleButton1.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton1.ImageOptions.SvgImage");
-            simpleButton1.ImageOptions.SvgImageSize = new System.Drawing.Size(15, 15);
-            simpleButton1.Location = new System.Drawing.Point(10, 11);
-            simpleButton1.Name = "simpleButton1";
-            simpleButton1.Size = new System.Drawing.Size(80, 20);
-            simpleButton1.TabIndex = 0;
-            simpleButton1.Text = "Xóa";
+            btnXoa.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnXoa.ImageOptions.SvgImage");
+            btnXoa.ImageOptions.SvgImageSize = new System.Drawing.Size(15, 15);
+            btnXoa.Location = new System.Drawing.Point(10, 11);
+            btnXoa.Name = "btnXoa";
+            btnXoa.Size = new System.Drawing.Size(80, 20);
+            btnXoa.TabIndex = 0;
+            btnXoa.Text = "Xóa";
+            btnXoa.Click += btnXoa_Click;
             // 
             // ucDanhMuc
             // 
@@ -108,7 +111,7 @@
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton btnLamMoi;
+        private DevExpress.XtraEditors.SimpleButton btnXoa;
     }
 }

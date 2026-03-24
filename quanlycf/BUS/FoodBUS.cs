@@ -38,5 +38,13 @@ namespace QuanLyQuanCafe.BUS
         {
             return FoodDAO.Instance.DeleteFood(foodId);
         }
+        public List<FoodDTO> GetFoodByCategoryID(int categoryId)
+        {
+            return FoodDAO.Instance.GetFoodByCategoryId(categoryId);
+        }
+        public List<FoodDTO> GetFoodByCategoryAndSize(int categoryId, string size)
+        {
+            return FoodDAO.Instance.GetFoodByCategoryAndSize(categoryId, size);
+        }
     }
 }

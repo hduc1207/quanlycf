@@ -39,26 +39,43 @@ namespace QuanLyQuanCafe.DAO
             return list;
         }
 
-        //Thêm bàn
-        public bool InsertTable(string tableName)
+        // Hàm Thêm
+        public bool InsertTable(string name)
         {
-            string query = "INSERT INTO TableFood(TableName) VALUES (@tableName)";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { tableName });
+            // Sửa cột name thành TableName, status thành TableStatus (Hoặc tên đúng trong SQL của bạn)
+            string query = "INSERT dbo.TableFood ( TableName, TableStatus ) VALUES ( @name , N'Trống' )";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name });
             return result > 0;
         }
-        //Update bàn
-        public bool UpdateTable(int tableId, string tableName)
+
+        // Hàm Sửa
+        public bool UpdateTable(int id, string name)
         {
-            string query = "UPDATE TableFood SET TableName = @tableName WHERE TableId = @tableId";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { tableId, tableName });
+            // Sửa cột name thành TableName, id thành TableId
+            string query = "UPDATE dbo.TableFood SET TableName = @name WHERE TableId = @id";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, id });
             return result > 0;
         }
-        //Xóa bàn
-        public bool DeleteTable(int tableId)
+
+        // Hàm Xóa
+        public bool DeleteTable(int id)
         {
-            string query = "DELETE FROM TableFood WHERE TableId = @tableId";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { tableId });
+            // Sửa cột id thành TableId
+            string query = "DELETE dbo.TableFood WHERE TableId = @id";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { id });
             return result > 0;
+        }
+        public bool SwitchTable(int idOldTable, int idNewTable)
+        {
+            string query1 = "UPDATE Bill SET TableId = @idNew WHERE TableId = @idOld AND BillStatus = 0";
+            DataProvider.Instance.ExecuteNonQuery(query1, new object[] { idNewTable, idOldTable });
+            string query2 = "UPDATE TableFood SET TableStatus = N'Trống' WHERE TableId = @idOld";
+            DataProvider.Instance.ExecuteNonQuery(query2, new object[] { idOldTable });
+            string query3 = "UPDATE TableFood SET TableStatus = N'Có người' WHERE TableId = @idNew";
+            DataProvider.Instance.ExecuteNonQuery(query3, new object[] { idNewTable });
+
+            return true;
         }
     }
 }
+

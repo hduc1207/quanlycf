@@ -78,5 +78,26 @@ namespace QuanLyQuanCafe.DAO
 
             return result > 0;
         }
+        public List<AccountDTO> GetListAccount()
+        {
+            List<AccountDTO> list = new List<AccountDTO>();
+            string query = "SELECT a.*, e.FullName FROM dbo.Account a LEFT JOIN dbo.Employee e ON a.UserName = e.UserName WHERE a.AccountStatus = 1 OR a.AccountStatus IS NULL";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                AccountDTO account = new AccountDTO(item);
+                list.Add(account);
+            }
+            return list;
+        }
+        public bool AdminUpdateAccount(string userName, string displayName, int type)
+        {
+            string query = "UPDATE dbo.Account SET DisplayName = @displayName , AccountType = @type WHERE UserName = @userName";
+
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { displayName, type, userName });
+            return result > 0;
+        }
     }
 }
