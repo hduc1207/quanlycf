@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36915.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quanlycf", "quanlycf\quanlycf.csproj", "{6C1AB416-EF75-4BD4-BC5A-FEB6B7EB08A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyQuanCafe", "quanlycf\QuanLyQuanCafe.csproj", "{6C1AB416-EF75-4BD4-BC5A-FEB6B7EB08A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
