@@ -54,11 +54,18 @@ namespace QuanLyQuanCafe.DAO
         // 4. Update thông tin tài khoản 
         public bool UpdateAccount(string userName, string displayName, string pass, string newPass, string fullName = null, string phone = null)
         {
-            // Gọi Stored Procedure mới (có 6 tham số)
             string query = "USP_UpdateAccount @userName , @displayName , @password , @newPassword , @fullName , @phone";
+            object objFullName = string.IsNullOrEmpty(fullName) ? (object)DBNull.Value : fullName;
+            object objPhone = string.IsNullOrEmpty(phone) ? (object)DBNull.Value : phone;
 
-            // Đẩy đủ 6 dữ liệu xuống SQL
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { userName, displayName, pass, newPass, fullName, phone });
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] {
+                userName,
+                displayName,
+                pass,
+                newPass,
+                objFullName,
+                objPhone
+            });
 
             return result > 0;
         }

@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using QuanLyQuanCafe.BUS;
+using QuanLyQuanCafe.DAO;
 using QuanLyQuanCafe.DTO;
 
 namespace QuanLyQuanCafe.GUI
@@ -20,6 +21,7 @@ namespace QuanLyQuanCafe.GUI
             InitializeComponent();
             lkDanhMuc.EditValueChanged += lkeDanhMuc_EditValueChanged;
             lkDoUong.EditValueChanged += lkDoUong_EditValueChanged;
+
             LoadDanhMuc();
         }
 
@@ -28,41 +30,57 @@ namespace QuanLyQuanCafe.GUI
             lkDanhMuc.Properties.DataSource = FoodCategoryBUS.Instance.GetListCategory();
             lkDanhMuc.Properties.DisplayMember = "CategoryName";
             lkDanhMuc.Properties.ValueMember = "CategoryId";
-
             lkDanhMuc.Properties.NullText = "-- Chọn danh mục --";
         }
-
         private void lkeDanhMuc_EditValueChanged(object sender, EventArgs e)
         {
             if (lkDanhMuc.EditValue == null) return;
-
             int categoryId = Convert.ToInt32(lkDanhMuc.EditValue);
+            List<FoodDTO> listFood = FoodBUS.Instance.GetListFood().Where(f => f.CategoryId == categoryId).ToList();
+            DataTable dtGop = new DataTable();
+            dtGop.Columns.Add("FoodId", typeof(int));
+            dtGop.Columns.Add("SizeName", typeof(string));
+            dtGop.Columns.Add("TenHienThi", typeof(string));
 
-            List<FoodDTO> listFood = FoodBUS.Instance.GetListFood();
-            var filteredFoods = listFood.Where(f => f.CategoryId == categoryId).ToList();
-            var danhSachMonAn = filteredFoods.Select(f => new
+            foreach (var food in listFood)
             {
-                FoodId = f.FoodId,
-                TenHienThi = f.FoodName
-            }).ToList();
+                List<FoodSizeDTO> listSize = FoodSizeDAO.Instance.GetListSizeByFoodID(food.FoodId);
 
-            lkDoUong.Properties.DataSource = danhSachMonAn;
+                if (listSize.Count > 0)
+                {
+                    foreach (var size in listSize)
+                    {
+                        dtGop.Rows.Add(food.FoodId, size.SizeName, $"{food.FoodName} (Size {size.SizeName})");
+                    }
+                }
+                else
+                {
+                    dtGop.Rows.Add(food.FoodId, "", food.FoodName);
+                }
+            }
+            lkDoUong.Properties.DataSource = dtGop;
             lkDoUong.Properties.DisplayMember = "TenHienThi";
-            lkDoUong.Properties.ValueMember = "FoodId";
+            lkDoUong.Properties.ValueMember = "TenHienThi";
             lkDoUong.Properties.NullText = "-- Chọn đồ uống --";
+            lkDoUong.Properties.PopulateColumns();
+            if (lkDoUong.Properties.Columns.Count > 0)
+            {
+                lkDoUong.Properties.Columns["FoodId"].Visible = false;
+                lkDoUong.Properties.Columns["SizeName"].Visible = false;
+                lkDoUong.Properties.Columns["TenHienThi"].Caption = "Tên đồ uống";
+            }
+            gridControl1.DataSource = null;
         }
-
         private void lkDoUong_EditValueChanged(object sender, EventArgs e)
         {
             if (lkDoUong.EditValue != null)
             {
-                int foodId = Convert.ToInt32(lkDoUong.EditValue);
-                string size = "";
+                int foodId = Convert.ToInt32(lkDoUong.GetColumnValue("FoodId"));
+                string size = lkDoUong.GetColumnValue("SizeName").ToString();
 
                 LoadBangNguyenLieu(foodId, size);
             }
         }
-
         void LoadBangNguyenLieu(int foodId, string size)
         {
             List<ChiTietCongThuc> listTemp = new List<ChiTietCongThuc>();
@@ -108,7 +126,6 @@ namespace QuanLyQuanCafe.GUI
                 gridView1.Columns["RecipeId"].Visible = false;
             }
         }
-
         private void btnLuu_Click(object sender, EventArgs e)
         {
             if (lkDoUong.EditValue == null)
@@ -116,9 +133,8 @@ namespace QuanLyQuanCafe.GUI
                 MessageBox.Show("Vui lòng chọn món đồ uống trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            int foodId = Convert.ToInt32(lkDoUong.EditValue);
-            string size = "";
+            int foodId = Convert.ToInt32(lkDoUong.GetColumnValue("FoodId"));
+            string size = lkDoUong.GetColumnValue("SizeName").ToString();
 
             gridView1.CloseEditor();
             gridView1.UpdateCurrentRow();
@@ -138,12 +154,10 @@ namespace QuanLyQuanCafe.GUI
                     RecipeBUS.Instance.DeleteRecipe(item.RecipeId);
                 }
             }
-
-            MessageBox.Show("Lưu công thức thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Lưu công thức cho {lkDoUong.Text} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadBangNguyenLieu(foodId, size);
         }
     }
-
     public class ChiTietCongThuc
     {
         public bool Chon { get; set; }
