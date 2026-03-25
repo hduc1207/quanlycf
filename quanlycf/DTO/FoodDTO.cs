@@ -12,8 +12,6 @@ namespace QuanLyQuanCafe.DTO
         public int FoodId { get; set; }
         public string FoodName { get; set; }
         public int CategoryId { get; set; }
-        public decimal Price { get; set; }
-        public string Size { get; set; }
 
         public FoodDTO() { }
 
@@ -22,8 +20,6 @@ namespace QuanLyQuanCafe.DTO
             this.FoodId = (int)row["FoodId"];
             this.FoodName = row["FoodName"].ToString();
             this.CategoryId = (int)row["CategoryId"];
-            this.Price = (decimal)row["Price"];
-            this.Size = row["Size"] == DBNull.Value ? "" : row["Size"].ToString();
         }
         public override string ToString()
         {

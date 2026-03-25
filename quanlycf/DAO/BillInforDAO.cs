@@ -43,11 +43,12 @@ namespace QuanLyQuanCafe.DAO
         public DataTable GetListBillInfoByTable(int tableId)
         {
             string query =
-                "SELECT F.FoodName, BI.Size, BI.Quantity, F.Price, " +
-                "(BI.Quantity * F.Price) AS TotalPrice, BI.ParentId, BI.BillInfoId " +
+                "SELECT F.FoodName, BI.Size, BI.Quantity, FS.Price, " +
+                "(BI.Quantity * FS.Price) AS TotalPrice, BI.ParentId, BI.BillInfoId " +
                 "FROM BillInfo BI " +
                 "JOIN Bill B ON BI.BillId = B.BillId " +
                 "JOIN Food F ON BI.FoodId = F.FoodId " +
+                "LEFT JOIN FoodSize FS ON F.FoodId = FS.FoodID AND BI.Size = FS.SizeName " +
                 "WHERE B.TableId = @tableId AND B.BillStatus = 0 " +
                 "ORDER BY ISNULL(BI.ParentId, BI.BillInfoId), " +
                 "CASE WHEN BI.ParentId IS NULL THEN 0 ELSE 1 END";

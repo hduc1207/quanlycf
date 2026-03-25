@@ -42,13 +42,13 @@
             labelControl2 = new DevExpress.XtraEditors.LabelControl();
             lbldangchon = new DevExpress.XtraEditors.LabelControl();
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            cbbSIze = new DevExpress.XtraEditors.ComboBoxEdit();
             ccbdanhmuc = new DevExpress.XtraEditors.ComboBoxEdit();
             btnChuyenBan = new DevExpress.XtraEditors.SimpleButton();
             cbbdouong = new DevExpress.XtraEditors.ComboBoxEdit();
             cbbBan = new DevExpress.XtraEditors.ComboBoxEdit();
             btnThem = new DevExpress.XtraEditors.SimpleButton();
             flpDanhSachBan = new System.Windows.Forms.FlowLayoutPanel();
+            lkeSize = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel1).BeginInit();
             splitContainerControl1.Panel1.SuspendLayout();
@@ -63,10 +63,10 @@
             ((System.ComponentModel.ISupportInitialize)spnGiamGia.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
             panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)cbbSIze.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ccbdanhmuc.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cbbdouong.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cbbBan.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lkeSize.Properties).BeginInit();
             SuspendLayout();
             // 
             // splitContainerControl1
@@ -186,8 +186,8 @@
             // 
             // panelControl1
             // 
-            panelControl1.Controls.Add(cbbSIze);
             panelControl1.Controls.Add(ccbdanhmuc);
+            panelControl1.Controls.Add(lkeSize);
             panelControl1.Controls.Add(btnChuyenBan);
             panelControl1.Controls.Add(cbbdouong);
             panelControl1.Controls.Add(cbbBan);
@@ -197,15 +197,6 @@
             panelControl1.Name = "panelControl1";
             panelControl1.Size = new System.Drawing.Size(595, 80);
             panelControl1.TabIndex = 7;
-            // 
-            // cbbSIze
-            // 
-            cbbSIze.EditValue = "--Size--";
-            cbbSIze.Location = new System.Drawing.Point(334, 29);
-            cbbSIze.Name = "cbbSIze";
-            cbbSIze.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            cbbSIze.Size = new System.Drawing.Size(77, 23);
-            cbbSIze.TabIndex = 3;
             // 
             // ccbdanhmuc
             // 
@@ -234,6 +225,7 @@
             cbbdouong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbbdouong.Size = new System.Drawing.Size(101, 23);
             cbbdouong.TabIndex = 1;
+            cbbdouong.SelectedIndexChanged += cbbdouong_SelectedIndexChanged;
             // 
             // cbbBan
             // 
@@ -262,12 +254,21 @@
             flpDanhSachBan.Size = new System.Drawing.Size(598, 700);
             flpDanhSachBan.TabIndex = 0;
             // 
-            // manhinhchinh
+            // lkeSize
+            // 
+            lkeSize.Location = new System.Drawing.Point(324, 28);
+            lkeSize.Name = "lkeSize";
+            lkeSize.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            lkeSize.Size = new System.Drawing.Size(77, 23);
+            lkeSize.TabIndex = 4;
+            lkeSize.EditValueChanged += lkeSize_EditValueChanged;
+            // 
+            // ucOrder
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(splitContainerControl1);
-            Name = "manhinhchinh";
+            Name = "ucOrder";
             Size = new System.Drawing.Size(1200, 700);
             Load += manhinhchinh_Load;
             ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel1).EndInit();
@@ -285,10 +286,10 @@
             ((System.ComponentModel.ISupportInitialize)spnGiamGia.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).EndInit();
             panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)cbbSIze.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)ccbdanhmuc.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)cbbdouong.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)cbbBan.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lkeSize.Properties).EndInit();
             ResumeLayout(false);
         }
 
@@ -301,7 +302,6 @@
         private DevExpress.XtraEditors.ComboBoxEdit ccbdanhmuc;
         private DevExpress.XtraEditors.SimpleButton btnChuyenBan;
         private DevExpress.XtraEditors.ComboBoxEdit cbbBan;
-        private DevExpress.XtraEditors.ComboBoxEdit cbbSIze;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.PanelControl panelControl2;
@@ -313,5 +313,6 @@
         private DevExpress.XtraEditors.SimpleButton btnThanhToan;
         private DevExpress.XtraEditors.TextEdit txtTongTien;
         private System.Windows.Forms.FlowLayoutPanel flpDanhSachBan;
+        private DevExpress.XtraEditors.LookUpEdit lkeSize;
     }
 }

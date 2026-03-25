@@ -19,14 +19,14 @@ namespace QuanLyQuanCafe.BUS
             return FoodDAO.Instance.GetListFood();
         }
 
-        public bool InsertFood(string foodName, int categoryId, decimal price, string size)
+        public bool InsertFood(string foodName, int categoryId)
         {
-            return FoodDAO.Instance.InsertFood(foodName, categoryId, price, size);
+            return FoodDAO.Instance.InsertFood(foodName, categoryId);
         }
 
-        public bool UpdateFood(int foodId, string foodName, int categoryId, decimal price, string size)
+        public bool UpdateFood(int foodId, string foodName, int categoryId)
         {
-            return FoodDAO.Instance.UpdateFood(foodId, foodName, categoryId, price, size);
+            return FoodDAO.Instance.UpdateFood(foodId, foodName, categoryId);
         }
 
         public bool IsFoodUsed(int foodId)
@@ -41,10 +41,6 @@ namespace QuanLyQuanCafe.BUS
         public List<FoodDTO> GetFoodByCategoryID(int categoryId)
         {
             return FoodDAO.Instance.GetFoodByCategoryId(categoryId);
-        }
-        public List<FoodDTO> GetFoodByCategoryAndSize(int categoryId, string size)
-        {
-            return FoodDAO.Instance.GetFoodByCategoryAndSize(categoryId, size);
         }
     }
 }

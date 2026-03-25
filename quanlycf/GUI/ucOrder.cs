@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using QuanLyQuanCafe.BUS;
+using QuanLyQuanCafe.DAO;
 using QuanLyQuanCafe.DTO;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,39 @@ namespace QuanLyQuanCafe.GUI
             LoadCategory();
             LoadTableCombo();
             LoadSizeCombo();
+            lkeSize.Properties.NullText = "--Size--";
+        }
+        void LoadSizeByFoodID(int foodID)
+        {
+            List<FoodSizeDTO> listSize = FoodSizeDAO.Instance.GetListSizeByFoodID(foodID);
+
+            lkeSize.Properties.DataSource = listSize;
+            lkeSize.Properties.DisplayMember = "SizeName";
+            lkeSize.Properties.ValueMember = "Price";
+            lkeSize.Properties.PopulateColumns();
+
+            if (lkeSize.Properties.Columns.Count > 0)
+            {
+                // 1. Ẩn 2 cột không cần thiết đi
+                lkeSize.Properties.Columns["ID"].Visible = false;
+                lkeSize.Properties.Columns["FoodID"].Visible = false;
+
+                // 2. Viết hóa tiêu đề cột cho đẹp
+                lkeSize.Properties.Columns["SizeName"].Caption = "Size";
+                lkeSize.Properties.Columns["Price"].Caption = "Giá tiền (VNĐ)";
+
+                // 3. Format cột giá tiền cho dễ nhìn (ví dụ: 15,000)
+                lkeSize.Properties.Columns["Price"].FormatType = DevExpress.Utils.FormatType.Numeric;
+                lkeSize.Properties.Columns["Price"].FormatString = "n0";
+            }
+            if (listSize.Count > 0)
+            {
+                lkeSize.EditValue = listSize[0].Price;
+            }
+            else
+            {
+                lkeSize.EditValue = null;
+            }
         }
 
         void LoadTable()
@@ -78,10 +112,7 @@ namespace QuanLyQuanCafe.GUI
         }
         void LoadSizeCombo()
         {
-            cbbSIze.Properties.Items.Clear();
-            cbbSIze.Properties.Items.Add("S");
-            cbbSIze.Properties.Items.Add("M");
-            cbbSIze.Properties.Items.Add("L");
+          
         }
         void ShowBill(int id)
         {
@@ -204,29 +235,38 @@ namespace QuanLyQuanCafe.GUI
             // 1. Kiểm tra xem đã chọn bàn chưa?
             if (banHienTai == null)
             {
-                MessageBox.Show("Vui lòng click chọn 1 Bàn trước khi thêm món!", "Thông báo");
+                MessageBox.Show("Vui lòng click chọn 1 Bàn trước khi thêm món!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // 2. Kiểm tra xem đã chọn đồ uống chưa?
             if (cbbdouong.SelectedItem == null)
             {
-                MessageBox.Show("Vui lòng chọn món cần thêm!", "Thông báo");
+                MessageBox.Show("Vui lòng chọn món cần thêm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 3. Lấy thông tin món và size
+            // 3. Lấy thông tin món
             FoodDTO monDuocChon = cbbdouong.SelectedItem as FoodDTO;
-            string size = cbbSIze.SelectedItem != null ? cbbSIze.SelectedItem.ToString() : "M";
+            if (lkeSize.EditValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn Size đồ uống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string size = lkeSize.Text;
+            float price = float.Parse(lkeSize.EditValue.ToString());
+
             int soLuong = 1;
             int idBill = BillBUS.Instance.GetUncheckBillByTableID(banHienTai.TableID);
-
             if (idBill == -1)
             {
                 BillBUS.Instance.InsertBill(banHienTai.TableID);
                 idBill = BillBUS.Instance.GetMaxIDBill();
             }
+            // Thêm món vào BillInfo
             BillInfoBUS.Instance.AddFoodToBill(idBill, monDuocChon.FoodId, soLuong, size);
+
+            // Load lại giao diện
             ShowBill(banHienTai.TableID);
             LoadTable();
         }
@@ -248,6 +288,23 @@ namespace QuanLyQuanCafe.GUI
                 LoadTable();
                 ShowBill(banHienTai.TableID);
             }
+        }
+
+        private void cbbdouong_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbbdouong.SelectedItem == null) return;
+
+            FoodDTO food = cbbdouong.SelectedItem as FoodDTO;
+
+            if (food != null)
+            {
+                LoadSizeByFoodID(food.FoodId);
+            }
+        }
+
+        private void lkeSize_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

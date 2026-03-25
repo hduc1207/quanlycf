@@ -78,6 +78,7 @@
             btnLamMoi.Size = new System.Drawing.Size(80, 20);
             btnLamMoi.TabIndex = 1;
             btnLamMoi.Text = "Refresh";
+            btnLamMoi.Click += btnLamMoi_Click;
             // 
             // btnXoa
             // 
@@ -88,6 +89,7 @@
             btnXoa.Size = new System.Drawing.Size(80, 20);
             btnXoa.TabIndex = 0;
             btnXoa.Text = "Xóa";
+            btnXoa.Click += btnXoa_Click;
             // 
             // ucTaiKhoan
             // 

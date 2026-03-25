@@ -19,6 +19,8 @@ namespace QuanLyQuanCafe.GUI
         {
             List<FoodDTO> listFood = FoodBUS.Instance.GetListFood();
             gridControl1.DataSource = new System.ComponentModel.BindingList<FoodDTO>(listFood);
+
+            // Tạo Dropdown chọn Danh Mục trong GridControl
             RepositoryItemLookUpEdit repoCategory = new RepositoryItemLookUpEdit();
             repoCategory.DataSource = FoodCategoryBUS.Instance.GetListCategory();
             repoCategory.DisplayMember = "CategoryName";
@@ -31,6 +33,8 @@ namespace QuanLyQuanCafe.GUI
         {
             LoadFood();
         }
+
+        // 3. Nút xóa món ăn
         private void btnXoa_Click(object sender, EventArgs e)
         {
             FoodDTO selectedFood = gridView1.GetFocusedRow() as FoodDTO;
@@ -39,11 +43,12 @@ namespace QuanLyQuanCafe.GUI
             {
                 if (FoodBUS.Instance.IsFoodUsed(selectedFood.FoodId))
                 {
-                    MessageBox.Show("Không thể xóa! Món này đã từng được gọi trong hóa đơn. Bạn chỉ có thể đổi tên hoặc sửa giá.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Không thể xóa! Món này đã từng được gọi trong hóa đơn. Bạn chỉ có thể đổi tên.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (MessageBox.Show($"Bạn có chắc chắn muốn xóa món: {selectedFood.FoodName} (Size: {selectedFood.Size})?",
+                // Đã bỏ chữ Size trong thông báo xác nhận
+                if (MessageBox.Show($"Bạn có chắc chắn muốn xóa món: {selectedFood.FoodName}?",
                                     "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     if (FoodBUS.Instance.DeleteFood(selectedFood.FoodId))
@@ -66,11 +71,10 @@ namespace QuanLyQuanCafe.GUI
         {
             FoodDTO food = e.Row as FoodDTO;
             if (food == null) return;
-            string size = string.IsNullOrEmpty(food.Size) ? "M" : food.Size;
 
             if (food.FoodId == 0)
             {
-                if (FoodBUS.Instance.InsertFood(food.FoodName, food.CategoryId, food.Price, size))
+                if (FoodBUS.Instance.InsertFood(food.FoodName, food.CategoryId))
                 {
                     LoadFood();
                 }
@@ -81,7 +85,7 @@ namespace QuanLyQuanCafe.GUI
             }
             else
             {
-                if (!FoodBUS.Instance.UpdateFood(food.FoodId, food.FoodName, food.CategoryId, food.Price, size))
+                if (!FoodBUS.Instance.UpdateFood(food.FoodId, food.FoodName, food.CategoryId))
                 {
                     MessageBox.Show("Sửa thất bại!", "Lỗi");
                 }

@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,11 +40,10 @@ namespace QuanLyQuanCafe.GUI
 
             List<FoodDTO> listFood = FoodBUS.Instance.GetListFood();
             var filteredFoods = listFood.Where(f => f.CategoryId == categoryId).ToList();
-
             var danhSachMonAn = filteredFoods.Select(f => new
             {
                 FoodId = f.FoodId,
-                TenHienThi = string.IsNullOrEmpty(f.Size) ? f.FoodName : $"{f.FoodName} (Size {f.Size})"
+                TenHienThi = f.FoodName
             }).ToList();
 
             lkDoUong.Properties.DataSource = danhSachMonAn;
@@ -57,9 +57,7 @@ namespace QuanLyQuanCafe.GUI
             if (lkDoUong.EditValue != null)
             {
                 int foodId = Convert.ToInt32(lkDoUong.EditValue);
-                List<FoodDTO> listFood = FoodBUS.Instance.GetListFood();
-                FoodDTO monDaChon = listFood.FirstOrDefault(f => f.FoodId == foodId);
-                string size = (monDaChon != null && monDaChon.Size != null) ? monDaChon.Size : "";
+                string size = "";
 
                 LoadBangNguyenLieu(foodId, size);
             }
@@ -120,9 +118,7 @@ namespace QuanLyQuanCafe.GUI
             }
 
             int foodId = Convert.ToInt32(lkDoUong.EditValue);
-            List<FoodDTO> listFood = FoodBUS.Instance.GetListFood();
-            FoodDTO monDaChon = listFood.FirstOrDefault(f => f.FoodId == foodId);
-            string size = (monDaChon != null && monDaChon.Size != null) ? monDaChon.Size : "";
+            string size = "";
 
             gridView1.CloseEditor();
             gridView1.UpdateCurrentRow();

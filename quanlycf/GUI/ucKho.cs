@@ -35,7 +35,7 @@ namespace QuanLyQuanCafe.GUI
             if (rowView != null && rowView["IngredientId"] != DBNull.Value)
             {
                 int id = Convert.ToInt32(rowView["IngredientId"]);
-                string name = rowView["Name"].ToString();
+                string name = rowView["IngredientName"].ToString();
                 if (IngredientBUS.Instance.IsIngredientUsed(id))
                 {
                     MessageBox.Show($"Không thể xóa [{name}] vì nguyên liệu này đang được dùng trong công thức món ăn!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -64,10 +64,10 @@ namespace QuanLyQuanCafe.GUI
         {
             DataRowView rowView = e.Row as DataRowView;
             if (rowView == null) return;
-            string name = rowView["Name"] == DBNull.Value ? "" : rowView["Name"].ToString();
+            string name = rowView["IngredientName"] == DBNull.Value ? "" : rowView["IngredientName"].ToString();
             string unit = rowView["Unit"] == DBNull.Value ? "kg" : rowView["Unit"].ToString();
             double quantity = rowView["Quantity"] == DBNull.Value ? 0 : Convert.ToDouble(rowView["Quantity"]);
-            decimal price = rowView["Price"] == DBNull.Value ? 0 : Convert.ToDecimal(rowView["Price"]);
+            decimal price = rowView["UnitPrice"] == DBNull.Value ? 0 : Convert.ToDecimal(rowView["UnitPrice"]);
             double minQty = rowView["MinQuantity"] == DBNull.Value ? 0 : Convert.ToDouble(rowView["MinQuantity"]);
 
             if (string.IsNullOrEmpty(name)) return;
