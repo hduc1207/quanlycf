@@ -18,6 +18,7 @@ namespace QuanLyQuanCafe
             InitializeComponent();
             MoManHinhChinh();
             this.loginAccount = acc;
+            PhanQuyen(this.loginAccount.Type);
         }
         public void PhanQuyen(int loaiTaiKhoan)
         {
