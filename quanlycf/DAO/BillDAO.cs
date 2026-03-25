@@ -60,13 +60,18 @@ namespace QuanLyQuanCafe.DAO
         //4. Lấy danh sách bill theo ngày
         public DataTable GetBillListByDate(DateTime checkIn, DateTime checkOut)
         {
-            string query =
-                "SELECT * FROM Bill " +
-                "WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut " +
-                "AND BillStatus = 1";
+            string query = @"
+                SELECT 
+                    t.TableName AS [Tên bàn], 
+                    b.DateCheckIn AS [Ngày vào], 
+                    b.DateCheckOut AS [Ngày ra], 
+                    b.Discount AS [Giảm giá], 
+                    b.TotalPrice AS [Tổng tiền] 
+                FROM dbo.Bill b 
+                JOIN dbo.TableFood t ON b.TableId = t.TableId 
+                WHERE b.DateCheckIn >= @checkIn AND b.DateCheckOut <= @checkOut AND b.BillStatus = 1";
 
-            return DataProvider.Instance.ExecuteQuery(query,
-                    new object[] { checkIn, checkOut });
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { checkIn, checkOut });
         }
         //5. Lấy id bill mới nhất
         public int GetMaxBillId()
@@ -93,7 +98,16 @@ namespace QuanLyQuanCafe.DAO
 
             DataProvider.Instance.ExecuteNonQuery(query, new object[] { idBill });
         }
-
+        public DataTable GetDoanhThuTheoNgay(DateTime tuNgay, DateTime denNgay)
+        {
+            string query = "SELECT CAST(DateCheckOut AS DATE) AS Ngay, SUM(TotalPrice) AS DoanhThu FROM Bill WHERE BillStatus = 1 AND DateCheckOut >= @tuNgay AND DateCheckOut <= @denNgay GROUP BY CAST(DateCheckOut AS DATE)";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { tuNgay, denNgay });
+        }
+        public DataTable GetMonBanChay(DateTime tuNgay, DateTime denNgay)
+        {
+            string query = "SELECT f.FoodName AS TenMon, SUM(bi.Quantity) AS SoLuong FROM BillInfo bi JOIN Bill b ON bi.BillId = b.BillId JOIN Food f ON bi.FoodId = f.FoodId WHERE b.BillStatus = 1 AND b.DateCheckOut >= @tuNgay AND b.DateCheckOut <= @denNgay GROUP BY f.FoodName ORDER BY SUM(bi.Quantity) DESC";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { tuNgay, denNgay });
+        }
     }
 }
 

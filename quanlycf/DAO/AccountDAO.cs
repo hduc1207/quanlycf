@@ -31,7 +31,6 @@ namespace QuanLyQuanCafe.DAO
         // 2. Lấy Account kèm theo FullName từ bảng Employee
         public AccountDTO GetAccountByUserName(string userName)
         {
-            // Sử dụng JOIN để lấy luôn tên thật của nhân viên
             string query = "SELECT a.*, e.FullName FROM Account a LEFT JOIN Employee e ON a.UserName = e.UserName WHERE a.UserName = @userName";
             DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { userName });
 
@@ -42,7 +41,7 @@ namespace QuanLyQuanCafe.DAO
             return null;
         }
 
-        // 3.  Thêm Account dùng Procedure (
+        // 3.  Thêm Account dùng Procedure
         public bool InsertAccount(string userName, string displayName, int type, string fullName, string phone)
         {
             // Gọi Procedure USP_InsertEmployeeWithAccount

@@ -65,14 +65,12 @@ namespace QuanLyQuanCafe.GUI
                 MessageBox.Show("Vui lòng chọn một bàn để xóa!", "Thông báo");
             }
         }
-
-        // 4. SỰ KIỆN THÊM VÀ SỬA TỰ ĐỘNG KHI GÕ
         private void gridView1_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             TableFoodDTO table = e.Row as TableFoodDTO;
             if (table == null) return;
 
-            if (table.TableID == 0) // Thêm mới
+            if (table.TableID == 0)
             {
                 if (TableFoodBUS.Instance.InsertTable(table.TableName))
                 {
@@ -83,7 +81,7 @@ namespace QuanLyQuanCafe.GUI
                     MessageBox.Show("Thêm bàn thất bại!", "Lỗi");
                 }
             }
-            else // Sửa
+            else
             {
                 if (!TableFoodBUS.Instance.UpdateTable(table.TableID, table.TableName))
                 {

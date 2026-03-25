@@ -47,13 +47,22 @@ namespace QuanLyQuanCafe.BUS
         // 6. Lấy danh sách Bill theo ngày
         public DataTable GetBillListByDate(DateTime checkIn, DateTime checkOut)
         {
-            return BillDAO.Instance.GetBillListByDate(checkIn, checkOut);
+            return QuanLyQuanCafe.DAO.BillDAO.Instance.GetBillListByDate(checkIn, checkOut);
         }
 
         // 7. Xem Doanh thu
         public DataTable GetDoanhThuByDate(DateTime fromDate, DateTime toDate)
         {
             return BillDAO.Instance.GetDoanhThuByDate(fromDate, toDate);
+        }
+        public DataTable GetDoanhThuTheoNgay(DateTime tuNgay, DateTime denNgay)
+        {
+            return BillDAO.Instance.GetDoanhThuTheoNgay(tuNgay, denNgay);
+        }
+
+        public DataTable GetMonBanChay(DateTime tuNgay, DateTime denNgay)
+        {
+            return BillDAO.Instance.GetMonBanChay(tuNgay, denNgay);
         }
 
     }

@@ -79,13 +79,6 @@ namespace QuanLyQuanCafe
             tabHienThi.TabPages.Add(tabMoi);
             tabHienThi.SelectedTabPage = tabMoi;
         }
-        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.Close();
-            }
-        }
         private void barButtonItem_Kho_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             tabHienThi.TabPages.Clear();
@@ -93,6 +86,49 @@ namespace QuanLyQuanCafe
             uc.Dock = DockStyle.Fill;
             DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
             tabMoi.Text = "Quản lý Kho";
+            tabMoi.Controls.Add(uc);
+            tabHienThi.TabPages.Add(tabMoi);
+            tabHienThi.SelectedTabPage = tabMoi;
+        }
+
+        private void bbtnlogout_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        private void btnCongThuc_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            tabHienThi.TabPages.Clear();
+            GUI.ucCongThuc uc = new GUI.ucCongThuc();
+            uc.Dock = DockStyle.Fill;
+            DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
+            tabMoi.Text = "Quản lý Công Thức";
+            tabMoi.Controls.Add(uc);
+            tabHienThi.TabPages.Add(tabMoi);
+            tabHienThi.SelectedTabPage = tabMoi;
+        }
+        private void btnThuNhap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            tabHienThi.TabPages.Clear();
+            GUI.ucThuNhap uc = new GUI.ucThuNhap();
+            uc.Dock = DockStyle.Fill;
+            DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
+            tabMoi.Text = "Thống kê thu nhập";
+            tabMoi.Controls.Add(uc);
+            tabHienThi.TabPages.Add(tabMoi);
+            tabHienThi.SelectedTabPage = tabMoi;
+        }
+
+        private void barButtonItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            tabHienThi.TabPages.Clear();
+            GUI.ucThongKe uc = new GUI.ucThongKe();
+            uc.Dock = DockStyle.Fill;
+            DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
+            tabMoi.Text = "Thống kê doanh thu";
             tabMoi.Controls.Add(uc);
             tabHienThi.TabPages.Add(tabMoi);
             tabHienThi.SelectedTabPage = tabMoi;

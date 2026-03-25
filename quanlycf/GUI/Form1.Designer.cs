@@ -70,7 +70,7 @@ namespace QuanLyQuanCafe
             ribbonControl1.Name = "ribbonControl1";
             ribbonControl1.OptionsMenuMinWidth = 385;
             ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { ribbonPage2, ribbonPage3, ribbonPage1 });
-            ribbonControl1.Size = new System.Drawing.Size(884, 213);
+            ribbonControl1.Size = new System.Drawing.Size(876, 213);
             ribbonControl1.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Below;
             ribbonControl1.Click += ribbonControl1_Click_1;
             // 
@@ -81,6 +81,7 @@ namespace QuanLyQuanCafe
             bbtnlogout.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("bbtnlogout.ImageOptions.SvgImage");
             bbtnlogout.Name = "bbtnlogout";
             bbtnlogout.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            bbtnlogout.ItemClick += bbtnlogout_ItemClick;
             // 
             // bbtninfo
             // 
@@ -143,6 +144,7 @@ namespace QuanLyQuanCafe
             btnCongThuc.Id = 13;
             btnCongThuc.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnCongThuc.ImageOptions.SvgImage");
             btnCongThuc.Name = "btnCongThuc";
+            btnCongThuc.ItemClick += btnCongThuc_ItemClick;
             // 
             // barButtonItem7
             // 
@@ -150,6 +152,7 @@ namespace QuanLyQuanCafe
             barButtonItem7.Id = 14;
             barButtonItem7.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem7.ImageOptions.SvgImage");
             barButtonItem7.Name = "barButtonItem7";
+            barButtonItem7.ItemClick += btnThuNhap_ItemClick;
             // 
             // barButtonItem8
             // 
@@ -157,6 +160,7 @@ namespace QuanLyQuanCafe
             barButtonItem8.Id = 15;
             barButtonItem8.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem8.ImageOptions.SvgImage");
             barButtonItem8.Name = "barButtonItem8";
+            barButtonItem8.ItemClick += barButtonItem8_ItemClick;
             // 
             // ribbonPage2
             // 
@@ -219,27 +223,27 @@ namespace QuanLyQuanCafe
             tabHienThi.Location = new System.Drawing.Point(0, 213);
             tabHienThi.Name = "tabHienThi";
             tabHienThi.SelectedTabPage = xtraTabPage1;
-            tabHienThi.Size = new System.Drawing.Size(884, 280);
+            tabHienThi.Size = new System.Drawing.Size(876, 276);
             tabHienThi.TabIndex = 1;
             tabHienThi.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage1, xtraTabPage2 });
             // 
             // xtraTabPage1
             // 
             xtraTabPage1.Name = "xtraTabPage1";
-            xtraTabPage1.Size = new System.Drawing.Size(880, 252);
+            xtraTabPage1.Size = new System.Drawing.Size(872, 248);
             xtraTabPage1.Text = "xtraTabPage1";
             // 
             // xtraTabPage2
             // 
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new System.Drawing.Size(880, 252);
+            xtraTabPage2.Size = new System.Drawing.Size(882, 250);
             xtraTabPage2.Text = "xtraTabPage2";
             // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(884, 493);
+            ClientSize = new System.Drawing.Size(876, 489);
             Controls.Add(tabHienThi);
             Controls.Add(ribbonControl1);
             Margin = new System.Windows.Forms.Padding(4);

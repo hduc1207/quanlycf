@@ -20,13 +20,13 @@ namespace QuanLyQuanCafe.BUS
             return AccountDAO.Instance.GetListAccount();
         }
 
-        // 2. Thêm mới (Đủ 5 tham số để chiều lòng cái Procedure của bạn)
+        // 2. Thêm mới
         public bool InsertAccount(string userName, string displayName, int type, string fullName, string phone)
         {
             return AccountDAO.Instance.InsertAccount(userName, displayName, type, fullName, phone);
         }
 
-        // 3. Sửa thông tin (Gọi đúng hàm AdminUpdateAccount)
+        // 3. Sửa thông tin
         public bool AdminUpdateAccount(string userName, string displayName, int type)
         {
             return AccountDAO.Instance.AdminUpdateAccount(userName, displayName, type);

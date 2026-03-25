@@ -1,10 +1,11 @@
 ﻿using DevExpress.XtraEditors;
+using QuanLyQuanCafe.BUS;
+using QuanLyQuanCafe.DTO;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-using QuanLyQuanCafe.BUS;
-using QuanLyQuanCafe.DTO;
 
 namespace QuanLyQuanCafe.GUI
 {
@@ -105,19 +106,79 @@ namespace QuanLyQuanCafe.GUI
         }
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            if (banHienTai == null) return;
-            int idBill = BillBUS.Instance.GetUncheckBillByTableID(banHienTai.TableID);
-            int giamGia = (int)spnGiamGia.Value;
-
-            if (idBill != -1)
+            if (banHienTai == null)
             {
-                if (MessageBox.Show($"Bạn có chắc thanh toán hóa đơn cho {banHienTai.TableName}?\nTổng tiền cần thu: {txtTongTien.Text}",
-                                    "Xác nhận thanh toán", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                MessageBox.Show("Vui lòng chọn một bàn để thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            int idHoaDon = BillBUS.Instance.GetUncheckBillByTableID(banHienTai.TableID);
+
+            if (idHoaDon != -1)
+            {
+                decimal giamGia = spnGiamGia.Value;
+                decimal tongTienThanhToan = tongTienGoc - (tongTienGoc * giamGia / 100);
+                double tongTien = (double)tongTienThanhToan;
+                frmThanhToan f = new frmThanhToan(idHoaDon, tongTien);
+
+                if (f.ShowDialog() == DialogResult.OK)
                 {
-                    BillBUS.Instance.CheckOut(idBill, giamGia);
-                    IngredientBUS.Instance.TruNguyenLieuTuHoaDon(idBill);
-                    ShowBill(banHienTai.TableID);
+                    BillBUS.Instance.CheckOut(idHoaDon, (int)giamGia);
+                    DialogResult hoiIn = MessageBox.Show("Thanh toán thành công. Bạn có muốn in hóa đơn?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (hoiIn == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            List<InHoaDonDTO> listMonIn = new List<InHoaDonDTO>();
+
+                            for (int i = 0; i < gridView1.RowCount; i++)
+                            {
+                                object tenMonObj = gridView1.GetRowCellValue(i, gridView1.VisibleColumns[0]);
+
+                                if (tenMonObj != null && !string.IsNullOrWhiteSpace(tenMonObj.ToString()))
+                                {
+                                    InHoaDonDTO item = new InHoaDonDTO();
+
+                                    item.TenMon = tenMonObj.ToString();
+                                    item.SoLuong = Convert.ToInt32(gridView1.GetRowCellValue(i, gridView1.VisibleColumns[2]) ?? 0);
+                                    item.DonGia = Convert.ToDouble(gridView1.GetRowCellValue(i, gridView1.VisibleColumns[3]) ?? 0);
+                                    item.ThanhTien = Convert.ToDouble(gridView1.GetRowCellValue(i, gridView1.VisibleColumns[4]) ?? 0);
+
+                                    listMonIn.Add(item);
+                                }
+                            }
+                            rptHoaDon rp = new rptHoaDon();
+
+                            // Đổ dữ liệu Phần Đầu
+                            rp.FindControl("lblSoBan", true).Text = banHienTai.TableName;
+                            rp.FindControl("lblNgay", true).Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+                            rp.FindControl("lblThuNgan", true).Text = "Admin"; // Hoặc tên tài khoản đăng nhập
+
+                            // Đổ dữ liệu Bảng Món Ăn
+                            rp.DataSource = listMonIn;
+                            rp.FindControl("cellTenMon", true).DataBindings.Add("Text", listMonIn, "TenMon");
+                            rp.FindControl("cellSL", true).DataBindings.Add("Text", listMonIn, "SoLuong");
+                            rp.FindControl("cellDonGia", true).DataBindings.Add("Text", listMonIn, "DonGia", "{0:n0}");
+                            rp.FindControl("cellThanhTien", true).DataBindings.Add("Text", listMonIn, "ThanhTien", "{0:n0}");
+
+                            // Đổ dữ liệu Phần Cuối
+                            double tamTinh = listMonIn.Sum(x => x.ThanhTien);
+                            rp.FindControl("lblTamTinh", true).Text = tamTinh.ToString("n0");
+                            rp.FindControl("lblGiamGia", true).Text = giamGia.ToString() + " %";
+                            rp.FindControl("lblTongCong", true).Text = tongTien.ToString("n0") + " đ";
+                            using (DevExpress.XtraReports.UI.ReportPrintTool printTool = new DevExpress.XtraReports.UI.ReportPrintTool(rp))
+                            {
+                                printTool.ShowPreviewDialog();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Lỗi khi xuất hóa đơn xịn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                     LoadTable();
+                    banHienTai = null;
+                    lbldangchon.Text = "Đang chọn: ";
                 }
             }
         }

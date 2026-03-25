@@ -42,7 +42,6 @@ namespace QuanLyQuanCafe.DAO
         // Hàm Thêm
         public bool InsertTable(string name)
         {
-            // Sửa cột name thành TableName, status thành TableStatus (Hoặc tên đúng trong SQL của bạn)
             string query = "INSERT dbo.TableFood ( TableName, TableStatus ) VALUES ( @name , N'Trống' )";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name });
             return result > 0;
@@ -51,7 +50,6 @@ namespace QuanLyQuanCafe.DAO
         // Hàm Sửa
         public bool UpdateTable(int id, string name)
         {
-            // Sửa cột name thành TableName, id thành TableId
             string query = "UPDATE dbo.TableFood SET TableName = @name WHERE TableId = @id";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { name, id });
             return result > 0;
@@ -60,7 +58,6 @@ namespace QuanLyQuanCafe.DAO
         // Hàm Xóa
         public bool DeleteTable(int id)
         {
-            // Sửa cột id thành TableId
             string query = "DELETE dbo.TableFood WHERE TableId = @id";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { id });
             return result > 0;
