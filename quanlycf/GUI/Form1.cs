@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyQuanCafe.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,10 +12,26 @@ namespace QuanLyQuanCafe
 {
     public partial class Form1 : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        public Form1()
+        private AccountDTO loginAccount;
+        public Form1(AccountDTO acc)
         {
             InitializeComponent();
             MoManHinhChinh();
+            this.loginAccount = acc;
+        }
+        public void PhanQuyen(int loaiTaiKhoan)
+        {
+            if (loaiTaiKhoan == 0)
+            {
+                pageQuanLy.Visible = false;
+                pageThongTin.Visible = false;
+            }
+            else
+            {
+                pageQuanLy.Visible = true;
+                pageThongTin.Visible = true;
+                // btnThongTinTaiKhoan.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            }
         }
 
         private void ribbonControl1_Click(object sender, EventArgs e) { }
@@ -22,7 +39,7 @@ namespace QuanLyQuanCafe
         private void MoManHinhChinh()
         {
             tabHienThi.TabPages.Clear();
-            GUI.manhinhchinh uc = new GUI.manhinhchinh();
+            GUI.ucOrder uc = new GUI.ucOrder();
             uc.Dock = DockStyle.Fill;
             DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
             tabMoi.Text = "Màn hình chính";
@@ -129,6 +146,17 @@ namespace QuanLyQuanCafe
             uc.Dock = DockStyle.Fill;
             DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
             tabMoi.Text = "Thống kê doanh thu";
+            tabMoi.Controls.Add(uc);
+            tabHienThi.TabPages.Add(tabMoi);
+            tabHienThi.SelectedTabPage = tabMoi;
+        }
+        private void btnThongTinTaiKhoan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            tabHienThi.TabPages.Clear();
+            GUI.ucAccountInfo uc = new GUI.ucAccountInfo(loginAccount);
+            uc.Dock = DockStyle.Fill;
+            DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
+            tabMoi.Text = "Thông tin tài khoản";
             tabMoi.Controls.Add(uc);
             tabHienThi.TabPages.Add(tabMoi);
             tabHienThi.SelectedTabPage = tabMoi;

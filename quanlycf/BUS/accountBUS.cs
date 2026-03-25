@@ -37,5 +37,17 @@ namespace QuanLyQuanCafe.BUS
         {
             return AccountDAO.Instance.DeleteAccount(userName);
         }
+        public bool UpdateAccount(string userName, string displayName, string pass, string newPass, string fullName = null, string phone = null)
+        {
+            return AccountDAO.Instance.UpdateAccount(userName, displayName, pass, newPass, fullName, phone);
+        }
+        public bool Login(string userName, string passWord)
+        {
+            return AccountDAO.Instance.Login(userName, passWord);
+        }
+        public AccountDTO GetAccountByUserName(string userName)
+        {
+            return AccountDAO.Instance.GetAccountByUserName(userName);
+        }
     }
 }

@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace QuanLyQuanCafe.GUI
 {
-    public partial class manhinhchinh : DevExpress.XtraEditors.XtraUserControl
+    public partial class ucOrder : DevExpress.XtraEditors.XtraUserControl
     {
         private TableFoodDTO banHienTai = null;
         private decimal tongTienGoc = 0;
-        public manhinhchinh()
+        public ucOrder()
         {
             InitializeComponent();
             LoadTable();

@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DevExpress.Win" Version="25.2.5" />
     <PackageReference Include="DevExpress.Win.BonusSkins" Version="25.2.5" />
     <PackageReference Include="DevExpress.Win.Design" Version="25.2.5" />
+    <PackageReference Include="DevExpress.Win.Grid" Version="25.2.5" />
+    <PackageReference Include="DevExpress.Win.Navigation" Version="25.2.5" />
+    <PackageReference Include="DevExpress.Win.Reporting" Version="25.2.5" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
     <PackageReference Include="payOS" Version="2.1.0" />
   </ItemGroup>

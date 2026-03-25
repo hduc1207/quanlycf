@@ -1,6 +1,6 @@
 ﻿namespace QuanLyQuanCafe.GUI
 {
-    partial class manhinhchinh
+    partial class ucOrder
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(manhinhchinh));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucOrder));
             alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(components);
             splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             gridControl1 = new DevExpress.XtraGrid.GridControl();
