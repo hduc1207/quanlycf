@@ -30,7 +30,6 @@ namespace QuanLyQuanCafe
             {
                 pageQuanLy.Visible = true;
                 pageThongTin.Visible = true;
-                // btnThongTinTaiKhoan.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
             }
         }
 

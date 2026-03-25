@@ -54,11 +54,8 @@ namespace QuanLyQuanCafe.GUI
             if (AccountBUS.Instance.UpdateAccount(userName, displayName, password, newPassword))
             {
                 XtraMessageBox.Show("Cập nhật thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Cập nhật lại mật khẩu/tên mới vào biến tạm
                 if (!string.IsNullOrEmpty(newPassword))
                 {
-                    // Xóa trắng các ô mật khẩu cho an toàn
                     txtMatKhau.Text = "";
                     txtMatKhauMoi.Text = "";
                     txtNhapLaiMK.Text = "";
@@ -70,7 +67,6 @@ namespace QuanLyQuanCafe.GUI
             }
         }
 
-        // SỰ KIỆN NÚT HỦY (Xóa trắng các ô nhập lại từ đầu)
         private void btnHuy_Click(object sender, EventArgs e)
         {
             LoadAccountInfo();
