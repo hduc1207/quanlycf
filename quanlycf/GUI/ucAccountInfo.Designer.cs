@@ -154,6 +154,7 @@
             btnCapNhat.Size = new System.Drawing.Size(118, 36);
             btnCapNhat.TabIndex = 11;
             btnCapNhat.Text = "Cập nhật";
+            btnCapNhat.Click += btnCapNhat_Click;
             // 
             // btnHuy
             // 
@@ -163,6 +164,7 @@
             btnHuy.Size = new System.Drawing.Size(118, 36);
             btnHuy.TabIndex = 12;
             btnHuy.Text = "Hủy";
+            btnHuy.Click += btnHuy_Click;
             // 
             // ucAccountInfo
             // 
