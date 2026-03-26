@@ -34,6 +34,7 @@
             labelControl2 = new DevExpress.XtraEditors.LabelControl();
             btnDangNhap = new DevExpress.XtraEditors.SimpleButton();
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            hllblQuenMK = new DevExpress.XtraEditors.HyperlinkLabelControl();
             ((System.ComponentModel.ISupportInitialize)txtTaiKhoan.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtMatKhau.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
@@ -90,6 +91,7 @@
             // 
             // panelControl1
             // 
+            panelControl1.Controls.Add(hllblQuenMK);
             panelControl1.Controls.Add(labelControl1);
             panelControl1.Controls.Add(txtMatKhau);
             panelControl1.Controls.Add(labelControl2);
@@ -97,14 +99,23 @@
             panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             panelControl1.Location = new System.Drawing.Point(0, 0);
             panelControl1.Name = "panelControl1";
-            panelControl1.Size = new System.Drawing.Size(664, 361);
+            panelControl1.Size = new System.Drawing.Size(656, 362);
             panelControl1.TabIndex = 6;
+            // 
+            // hllblQuenMK
+            // 
+            hllblQuenMK.Location = new System.Drawing.Point(324, 224);
+            hllblQuenMK.Name = "hllblQuenMK";
+            hllblQuenMK.Size = new System.Drawing.Size(93, 16);
+            hllblQuenMK.TabIndex = 5;
+            hllblQuenMK.Text = "Quên mật khẩu?";
+            hllblQuenMK.Click += hllblQuenMK_Click;
             // 
             // DangNhap
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(664, 361);
+            ClientSize = new System.Drawing.Size(656, 362);
             Controls.Add(btnDangNhap);
             Controls.Add(panelControl1);
             Name = "DangNhap";
@@ -125,5 +136,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.SimpleButton btnDangNhap;
         private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.HyperlinkLabelControl hllblQuenMK;
     }
 }

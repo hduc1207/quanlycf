@@ -71,11 +71,10 @@ namespace QuanLyQuanCafe.DAO
         }
 
         // 5. Reset mật khẩu 
-        public bool ResetPassword(string userName)
+        public bool ResetPassword(string userName, string newPassword)
         {
-            string query = "UPDATE Account SET PassWord = N'1' WHERE UserName = @userName";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { userName });
-
+            string query = "UPDATE Account SET PassWord = @pass WHERE UserName = @userName";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { newPassword, userName });
             return result > 0;
         }
 
@@ -107,6 +106,12 @@ namespace QuanLyQuanCafe.DAO
 
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { displayName, type, userName });
             return result > 0;
+        }
+        public string GetEmailByUserName(string userName)
+        {
+            string query = "SELECT Email FROM dbo.Employee WHERE UserName = @userName";
+            object result = DataProvider.Instance.ExecuteScalar(query, new object[] { userName });
+            return (result != null && result != DBNull.Value) ? result.ToString() : "";
         }
     }
 }

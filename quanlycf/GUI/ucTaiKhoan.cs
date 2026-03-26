@@ -19,6 +19,10 @@ namespace QuanLyQuanCafe.GUI
         {
             List<AccountDTO> listAccount = AccountBUS.Instance.GetListAccount();
             gridControl1.DataSource = new BindingList<AccountDTO>(listAccount);
+            if (gridView1.Columns["FullName"] != null)
+            {
+                gridView1.Columns["FullName"].Visible = false;
+            }
         }
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
