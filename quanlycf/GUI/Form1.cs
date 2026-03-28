@@ -161,5 +161,16 @@ namespace QuanLyQuanCafe
             tabHienThi.TabPages.Add(tabMoi);
             tabHienThi.SelectedTabPage = tabMoi;
         }
+
+        private void btnVoucher_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            tabHienThi.TabPages.Clear();
+            GUI.ucVoucher uc = new GUI.ucVoucher();
+            uc.Dock = DockStyle.Fill;
+            DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
+            tabMoi.Text = "Quản lý Voucher";
+            tabMoi.Controls.Add(uc);
+            tabHienThi.TabPages.Add(tabMoi);
+        }
     }
 }

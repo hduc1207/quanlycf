@@ -43,6 +43,7 @@ namespace QuanLyQuanCafe
             btnCongThuc = new BarButtonItem();
             barButtonItem7 = new BarButtonItem();
             barButtonItem8 = new BarButtonItem();
+            btnVoucher = new BarButtonItem();
             PageChucNang = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -63,14 +64,14 @@ namespace QuanLyQuanCafe
             // 
             ribbonControl1.EmptyAreaImageOptions.ImagePadding = new System.Windows.Forms.Padding(35, 37, 35, 37);
             ribbonControl1.ExpandCollapseItem.Id = 0;
-            ribbonControl1.Items.AddRange(new BarItem[] { ribbonControl1.ExpandCollapseItem, bbtnlogout, bbtninfo, bbtnTacVU, btnThucDon, btnDanhMuc, btnBan, btnTaiKhoan, btnKho, btnCongThuc, barButtonItem7, barButtonItem8 });
+            ribbonControl1.Items.AddRange(new BarItem[] { ribbonControl1.ExpandCollapseItem, bbtnlogout, bbtninfo, bbtnTacVU, btnThucDon, btnDanhMuc, btnBan, btnTaiKhoan, btnKho, btnCongThuc, barButtonItem7, barButtonItem8, btnVoucher });
             ribbonControl1.Location = new System.Drawing.Point(0, 0);
             ribbonControl1.Margin = new System.Windows.Forms.Padding(4);
-            ribbonControl1.MaxItemId = 16;
+            ribbonControl1.MaxItemId = 17;
             ribbonControl1.Name = "ribbonControl1";
             ribbonControl1.OptionsMenuMinWidth = 385;
             ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { PageChucNang, pageQuanLy, pageThongTin });
-            ribbonControl1.Size = new System.Drawing.Size(868, 213);
+            ribbonControl1.Size = new System.Drawing.Size(860, 213);
             ribbonControl1.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Below;
             ribbonControl1.Click += ribbonControl1_Click_1;
             // 
@@ -163,6 +164,14 @@ namespace QuanLyQuanCafe
             barButtonItem8.Name = "barButtonItem8";
             barButtonItem8.ItemClick += barButtonItem8_ItemClick;
             // 
+            // btnVoucher
+            // 
+            btnVoucher.Caption = "Voucher";
+            btnVoucher.Id = 16;
+            btnVoucher.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnVoucher.ImageOptions.SvgImage");
+            btnVoucher.Name = "btnVoucher";
+            btnVoucher.ItemClick += btnVoucher_ItemClick;
+            // 
             // PageChucNang
             // 
             PageChucNang.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup2, ribbonPageGroup3 });
@@ -196,6 +205,7 @@ namespace QuanLyQuanCafe
             ribbonPageGroup4.ItemLinks.Add(btnTaiKhoan);
             ribbonPageGroup4.ItemLinks.Add(btnKho);
             ribbonPageGroup4.ItemLinks.Add(btnCongThuc);
+            ribbonPageGroup4.ItemLinks.Add(btnVoucher);
             ribbonPageGroup4.Name = "ribbonPageGroup4";
             ribbonPageGroup4.Text = "Danh mục";
             // 
@@ -224,27 +234,27 @@ namespace QuanLyQuanCafe
             tabHienThi.Location = new System.Drawing.Point(0, 213);
             tabHienThi.Name = "tabHienThi";
             tabHienThi.SelectedTabPage = xtraTabPage1;
-            tabHienThi.Size = new System.Drawing.Size(868, 272);
+            tabHienThi.Size = new System.Drawing.Size(860, 268);
             tabHienThi.TabIndex = 1;
             tabHienThi.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage1, xtraTabPage2 });
             // 
             // xtraTabPage1
             // 
             xtraTabPage1.Name = "xtraTabPage1";
-            xtraTabPage1.Size = new System.Drawing.Size(864, 244);
+            xtraTabPage1.Size = new System.Drawing.Size(856, 240);
             xtraTabPage1.Text = "xtraTabPage1";
             // 
             // xtraTabPage2
             // 
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new System.Drawing.Size(874, 246);
+            xtraTabPage2.Size = new System.Drawing.Size(866, 242);
             xtraTabPage2.Text = "xtraTabPage2";
             // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(868, 485);
+            ClientSize = new System.Drawing.Size(860, 481);
             Controls.Add(tabHienThi);
             Controls.Add(ribbonControl1);
             Margin = new System.Windows.Forms.Padding(4);
@@ -285,6 +295,7 @@ namespace QuanLyQuanCafe
         private DevExpress.XtraBars.BarButtonItem barButtonItem7;
         private DevExpress.XtraBars.BarButtonItem barButtonItem8;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
+        private BarButtonItem btnVoucher;
     }
 }
 

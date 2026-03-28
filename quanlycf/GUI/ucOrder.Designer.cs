@@ -35,20 +35,21 @@
             gridControl1 = new DevExpress.XtraGrid.GridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            lblTienVoucher = new DevExpress.XtraEditors.LabelControl();
+            lkeVoucher = new DevExpress.XtraEditors.LookUpEdit();
             btnThanhToan = new DevExpress.XtraEditors.SimpleButton();
             txtTongTien = new DevExpress.XtraEditors.TextEdit();
             labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            spnGiamGia = new DevExpress.XtraEditors.SpinEdit();
             labelControl2 = new DevExpress.XtraEditors.LabelControl();
             lbldangchon = new DevExpress.XtraEditors.LabelControl();
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
             ccbdanhmuc = new DevExpress.XtraEditors.ComboBoxEdit();
+            lkeSize = new DevExpress.XtraEditors.LookUpEdit();
             btnChuyenBan = new DevExpress.XtraEditors.SimpleButton();
             cbbdouong = new DevExpress.XtraEditors.ComboBoxEdit();
             cbbBan = new DevExpress.XtraEditors.ComboBoxEdit();
             btnThem = new DevExpress.XtraEditors.SimpleButton();
             flpDanhSachBan = new System.Windows.Forms.FlowLayoutPanel();
-            lkeSize = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel1).BeginInit();
             splitContainerControl1.Panel1.SuspendLayout();
@@ -59,14 +60,14 @@
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl2).BeginInit();
             panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)lkeVoucher.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtTongTien.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)spnGiamGia.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
             panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ccbdanhmuc.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lkeSize.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cbbdouong.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cbbBan.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)lkeSize.Properties).BeginInit();
             SuspendLayout();
             // 
             // splitContainerControl1
@@ -109,10 +110,11 @@
             // 
             // panelControl2
             // 
+            panelControl2.Controls.Add(lblTienVoucher);
+            panelControl2.Controls.Add(lkeVoucher);
             panelControl2.Controls.Add(btnThanhToan);
             panelControl2.Controls.Add(txtTongTien);
             panelControl2.Controls.Add(labelControl3);
-            panelControl2.Controls.Add(spnGiamGia);
             panelControl2.Controls.Add(labelControl2);
             panelControl2.Controls.Add(lbldangchon);
             panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -120,6 +122,25 @@
             panelControl2.Name = "panelControl2";
             panelControl2.Size = new System.Drawing.Size(595, 80);
             panelControl2.TabIndex = 8;
+            // 
+            // lblTienVoucher
+            // 
+            lblTienVoucher.Appearance.ForeColor = System.Drawing.Color.Red;
+            lblTienVoucher.Appearance.Options.UseForeColor = true;
+            lblTienVoucher.Location = new System.Drawing.Point(334, 11);
+            lblTienVoucher.Name = "lblTienVoucher";
+            lblTienVoucher.Size = new System.Drawing.Size(94, 16);
+            lblTienVoucher.TabIndex = 8;
+            lblTienVoucher.Text = "Tiền được giảm:";
+            // 
+            // lkeVoucher
+            // 
+            lkeVoucher.Location = new System.Drawing.Point(166, 30);
+            lkeVoucher.Name = "lkeVoucher";
+            lkeVoucher.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            lkeVoucher.Size = new System.Drawing.Size(138, 23);
+            lkeVoucher.TabIndex = 7;
+            lkeVoucher.EditValueChanged += lkeVoucher_EditValueChanged;
             // 
             // btnThanhToan
             // 
@@ -139,24 +160,10 @@
             // 
             // labelControl3
             // 
-            labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            labelControl3.Appearance.Options.UseFont = true;
-            labelControl3.Location = new System.Drawing.Point(164, 31);
+            labelControl3.Location = new System.Drawing.Point(0, 0);
             labelControl3.Name = "labelControl3";
-            labelControl3.Size = new System.Drawing.Size(61, 18);
-            labelControl3.TabIndex = 3;
-            labelControl3.Text = "Giảm giá:";
-            labelControl3.Click += labelControl3_Click;
-            // 
-            // spnGiamGia
-            // 
-            spnGiamGia.EditValue = new decimal(new int[] { 0, 0, 0, 0 });
-            spnGiamGia.Location = new System.Drawing.Point(231, 29);
-            spnGiamGia.Name = "spnGiamGia";
-            spnGiamGia.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            spnGiamGia.Size = new System.Drawing.Size(89, 24);
-            spnGiamGia.TabIndex = 2;
-            spnGiamGia.EditValueChanged += spinEdit1_EditValueChanged;
+            labelControl3.Size = new System.Drawing.Size(0, 16);
+            labelControl3.TabIndex = 6;
             // 
             // labelControl2
             // 
@@ -208,6 +215,15 @@
             ccbdanhmuc.TabIndex = 0;
             ccbdanhmuc.SelectedIndexChanged += ccbdanhmuc_SelectedIndexChanged;
             // 
+            // lkeSize
+            // 
+            lkeSize.Location = new System.Drawing.Point(324, 28);
+            lkeSize.Name = "lkeSize";
+            lkeSize.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            lkeSize.Size = new System.Drawing.Size(77, 23);
+            lkeSize.TabIndex = 4;
+            lkeSize.EditValueChanged += lkeSize_EditValueChanged;
+            // 
             // btnChuyenBan
             // 
             btnChuyenBan.Location = new System.Drawing.Point(445, 13);
@@ -254,15 +270,6 @@
             flpDanhSachBan.Size = new System.Drawing.Size(598, 700);
             flpDanhSachBan.TabIndex = 0;
             // 
-            // lkeSize
-            // 
-            lkeSize.Location = new System.Drawing.Point(324, 28);
-            lkeSize.Name = "lkeSize";
-            lkeSize.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            lkeSize.Size = new System.Drawing.Size(77, 23);
-            lkeSize.TabIndex = 4;
-            lkeSize.EditValueChanged += lkeSize_EditValueChanged;
-            // 
             // ucOrder
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -282,14 +289,14 @@
             ((System.ComponentModel.ISupportInitialize)panelControl2).EndInit();
             panelControl2.ResumeLayout(false);
             panelControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)lkeVoucher.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtTongTien.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)spnGiamGia.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).EndInit();
             panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ccbdanhmuc.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lkeSize.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)cbbdouong.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)cbbBan.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)lkeSize.Properties).EndInit();
             ResumeLayout(false);
         }
 
@@ -309,10 +316,11 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl lbldangchon;
         private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.SpinEdit spnGiamGia;
         private DevExpress.XtraEditors.SimpleButton btnThanhToan;
         private DevExpress.XtraEditors.TextEdit txtTongTien;
         private System.Windows.Forms.FlowLayoutPanel flpDanhSachBan;
         private DevExpress.XtraEditors.LookUpEdit lkeSize;
+        private DevExpress.XtraEditors.LookUpEdit lkeVoucher;
+        private DevExpress.XtraEditors.LabelControl lblTienVoucher;
     }
 }
