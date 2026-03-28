@@ -43,6 +43,7 @@
             labelControl2 = new DevExpress.XtraEditors.LabelControl();
             lbldangchon = new DevExpress.XtraEditors.LabelControl();
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            btnHuy = new DevExpress.XtraEditors.SimpleButton();
             ccbdanhmuc = new DevExpress.XtraEditors.ComboBoxEdit();
             lkeSize = new DevExpress.XtraEditors.LookUpEdit();
             btnChuyenBan = new DevExpress.XtraEditors.SimpleButton();
@@ -193,6 +194,7 @@
             // 
             // panelControl1
             // 
+            panelControl1.Controls.Add(btnHuy);
             panelControl1.Controls.Add(ccbdanhmuc);
             panelControl1.Controls.Add(lkeSize);
             panelControl1.Controls.Add(btnChuyenBan);
@@ -204,6 +206,15 @@
             panelControl1.Name = "panelControl1";
             panelControl1.Size = new System.Drawing.Size(595, 80);
             panelControl1.TabIndex = 7;
+            // 
+            // btnHuy
+            // 
+            btnHuy.Location = new System.Drawing.Point(190, 45);
+            btnHuy.Name = "btnHuy";
+            btnHuy.Size = new System.Drawing.Size(93, 27);
+            btnHuy.TabIndex = 6;
+            btnHuy.Text = "Hủy món";
+            btnHuy.Click += btnHuy_Click;
             // 
             // ccbdanhmuc
             // 
@@ -254,7 +265,7 @@
             // 
             // btnThem
             // 
-            btnThem.Location = new System.Drawing.Point(190, 25);
+            btnThem.Location = new System.Drawing.Point(190, 5);
             btnThem.Name = "btnThem";
             btnThem.Size = new System.Drawing.Size(93, 27);
             btnThem.TabIndex = 2;
@@ -322,5 +333,6 @@
         private DevExpress.XtraEditors.LookUpEdit lkeSize;
         private DevExpress.XtraEditors.LookUpEdit lkeVoucher;
         private DevExpress.XtraEditors.LabelControl lblTienVoucher;
+        private DevExpress.XtraEditors.SimpleButton btnHuy;
     }
 }

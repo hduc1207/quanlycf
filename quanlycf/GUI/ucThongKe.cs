@@ -48,7 +48,7 @@ namespace QuanLyQuanCafe.GUI
         void VeBieuDoDoanhThu(DateTime tuNgay, DateTime denNgay)
         {
             chartDoanhThu.Series.Clear();
-            Series seriesDoanhThu = new Series("Doanh thu (VNĐ)", ViewType.Line);
+            Series seriesDoanhThu = new Series("Doanh thu thực tế (VNĐ)", ViewType.Line);
             DataTable dt = BillBUS.Instance.GetDoanhThuTheoNgay(tuNgay, denNgay);
 
             if (dt != null && dt.Rows.Count > 0)
@@ -56,17 +56,26 @@ namespace QuanLyQuanCafe.GUI
                 foreach (DataRow row in dt.Rows)
                 {
                     DateTime ngay = Convert.ToDateTime(row["Ngay"]);
-                    double doanhThu = Convert.ToDouble(row["DoanhThu"]);
-                    seriesDoanhThu.Points.Add(new SeriesPoint(ngay.ToString("dd/MM"), doanhThu));
+                    double doanhThuBan = Convert.ToDouble(row["DoanhThu"]);
+                    double tienThatThoat = 0;
+                    try
+                    {
+                        string queryWaste = $"SELECT ISNULL(SUM(LossValue), 0) FROM dbo.WasteLog WHERE CAST(CreatedAt AS DATE) = '{ngay.ToString("yyyy-MM-dd")}'";
+                        tienThatThoat = Convert.ToDouble(QuanLyQuanCafe.DAO.DataProvider.Instance.ExecuteScalar(queryWaste));
+                    }
+                    catch { }
+                    double thucThu = doanhThuBan - tienThatThoat;
+                    seriesDoanhThu.Points.Add(new SeriesPoint(ngay.ToString("dd/MM"), thucThu));
                 }
             }
+
             ((LineSeriesView)seriesDoanhThu.View).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True;
             seriesDoanhThu.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
 
             chartDoanhThu.Series.Add(seriesDoanhThu);
 
             ChartTitle title = new ChartTitle();
-            title.Text = "BIỂU ĐỒ DOANH THU 7 NGÀY GẦN NHẤT";
+            title.Text = "BIỂU ĐỒ DOANH THU THỰC TẾ 7 NGÀY GẦN NHẤT";
             chartDoanhThu.Titles.Add(title);
         }
     }

@@ -19,8 +19,6 @@ namespace QuanLyQuanCafe.GUI
         {
             List<FoodDTO> listFood = FoodBUS.Instance.GetListFood();
             gridControl1.DataSource = new System.ComponentModel.BindingList<FoodDTO>(listFood);
-
-            // Tạo Dropdown chọn Danh Mục trong GridControl
             RepositoryItemLookUpEdit repoCategory = new RepositoryItemLookUpEdit();
             repoCategory.DataSource = FoodCategoryBUS.Instance.GetListCategory();
             repoCategory.DisplayMember = "CategoryName";
@@ -46,8 +44,6 @@ namespace QuanLyQuanCafe.GUI
                     MessageBox.Show("Không thể xóa! Món này đã từng được gọi trong hóa đơn. Bạn chỉ có thể đổi tên.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
-                // Đã bỏ chữ Size trong thông báo xác nhận
                 if (MessageBox.Show($"Bạn có chắc chắn muốn xóa món: {selectedFood.FoodName}?",
                                     "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {

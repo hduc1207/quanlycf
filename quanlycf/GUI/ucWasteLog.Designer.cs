@@ -1,6 +1,6 @@
 ﻿namespace QuanLyQuanCafe.GUI
 {
-    partial class ucVoucher
+    partial class ucWasteLog
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucVoucher));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucWasteLog));
             gridControl1 = new DevExpress.XtraGrid.GridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -47,7 +47,7 @@
             gridControl1.MainView = gridView1;
             gridControl1.Name = "gridControl1";
             gridControl1.Size = new System.Drawing.Size(1200, 660);
-            gridControl1.TabIndex = 5;
+            gridControl1.TabIndex = 7;
             gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
             // gridView1
@@ -66,11 +66,11 @@
             panelControl1.Location = new System.Drawing.Point(0, 0);
             panelControl1.Name = "panelControl1";
             panelControl1.Size = new System.Drawing.Size(1200, 40);
-            panelControl1.TabIndex = 4;
+            panelControl1.TabIndex = 6;
             // 
             // btnLamMoi
             // 
-            btnLamMoi.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton2.ImageOptions.SvgImage");
+            btnLamMoi.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnLamMoi.ImageOptions.SvgImage");
             btnLamMoi.ImageOptions.SvgImageSize = new System.Drawing.Size(15, 15);
             btnLamMoi.Location = new System.Drawing.Point(96, 11);
             btnLamMoi.Name = "btnLamMoi";
@@ -81,7 +81,7 @@
             // 
             // btnXoa
             // 
-            btnXoa.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("simpleButton1.ImageOptions.SvgImage");
+            btnXoa.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnXoa.ImageOptions.SvgImage");
             btnXoa.ImageOptions.SvgImageSize = new System.Drawing.Size(15, 15);
             btnXoa.Location = new System.Drawing.Point(10, 11);
             btnXoa.Name = "btnXoa";
@@ -90,13 +90,13 @@
             btnXoa.Text = "Xóa";
             btnXoa.Click += btnXoa_Click;
             // 
-            // ucVoucher
+            // ucWasteLog
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(gridControl1);
             Controls.Add(panelControl1);
-            Name = "ucVoucher";
+            Name = "ucWasteLog";
             Size = new System.Drawing.Size(1200, 700);
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();

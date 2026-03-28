@@ -29,9 +29,13 @@ namespace QuanLyQuanCafe.GUI
         }
         void LoadListBillByDate(DateTime checkIn, DateTime checkOut)
         {
+            // 1. Tải bảng hóa đơn lên
             DataTable data = BillBUS.Instance.GetBillListByDate(checkIn, checkOut);
             gridControl1.DataSource = data;
+
             decimal tongDoanhThu = 0;
+
+            // 2. Tính tổng tiền từ các hóa đơn
             if (data != null && data.Rows.Count > 0)
             {
                 foreach (DataRow row in data.Rows)
@@ -42,8 +46,20 @@ namespace QuanLyQuanCafe.GUI
                     }
                 }
             }
-            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("vi-VN");
-            txtTongThu.Text = tongDoanhThu.ToString("c0", culture);
+            //TÍNH TIỀN THẤT THOÁT ĐỂ TRỪ VÀO THỰC THU
+            try
+            {
+                string queryWaste = $"SELECT ISNULL(SUM(LossValue), 0) FROM dbo.WasteLog WHERE CAST(CreatedAt AS DATE) >= '{checkIn.ToString("yyyy-MM-dd")}' AND CAST(CreatedAt AS DATE) <= '{checkOut.ToString("yyyy-MM-dd")}'";
+                decimal tienThatThoat = Convert.ToDecimal(QuanLyQuanCafe.DAO.DataProvider.Instance.ExecuteScalar(queryWaste));
+                decimal thucThu = tongDoanhThu - tienThatThoat;
+                System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("vi-VN");
+                txtTongThu.Text = thucThu.ToString("c0", culture);
+                lblThatThoat.Text = "- " + tienThatThoat.ToString("c0", culture);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi khi tính toán thực thu: " + ex.Message);
+            }
         }
         private void btnLoc_Click(object sender, EventArgs e)
         {

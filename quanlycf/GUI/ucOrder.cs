@@ -320,7 +320,6 @@ namespace QuanLyQuanCafe.GUI
 
         private void lkeVoucher_EditValueChanged(object sender, EventArgs e)
         {
-            // Nếu thu ngân bấm dấu X (hủy mã) hoặc chưa chọn gì
             if (lkeVoucher.EditValue == null || string.IsNullOrEmpty(lkeVoucher.EditValue.ToString()))
             {
                 currentVoucherCode = "";
@@ -335,17 +334,12 @@ namespace QuanLyQuanCafe.GUI
 
             if (voucher != null)
             {
-                // Kiểm tra đơn tối thiểu
                 if ((float)tongTienGoc < voucher.MinBillValue)
                 {
                     MessageBox.Show($"Đơn hàng chưa đủ {voucher.MinBillValue.ToString("N0")}đ để áp mã này!", "Chưa đủ điều kiện", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    // Reset cái combo box về trạng thái trống
                     lkeVoucher.EditValue = null;
                     return;
                 }
-
-                // Đủ điều kiện thì tính tiền giảm
                 if (voucher.DiscountType == 0) tienGiamVoucher = (decimal)voucher.DiscountValue;
                 else
                 {
@@ -353,11 +347,48 @@ namespace QuanLyQuanCafe.GUI
                     if (voucher.MaxDiscount > 0 && tienGiamVoucher > (decimal)voucher.MaxDiscount)
                         tienGiamVoucher = (decimal)voucher.MaxDiscount;
                 }
-
-                // Áp dụng thành công
                 currentVoucherCode = code;
                 lblTienVoucher.Text = "-" + tienGiamVoucher.ToString("n0") + "đ";
                 TinhTienSauGiamGia();
+            }
+        }
+
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            if (banHienTai == null) return;
+            int idHoaDon = BillBUS.Instance.GetUncheckBillByTableID(banHienTai.TableID);
+            if (idHoaDon == -1) return;
+
+            int rowHandle = gridView1.FocusedRowHandle;
+            if (rowHandle < 0)
+            {
+                MessageBox.Show("Vui lòng click chọn một món trên Bill để hủy!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string tenMon = gridView1.GetRowCellValue(rowHandle, gridView1.VisibleColumns[0])?.ToString();
+            int soLuong = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, gridView1.VisibleColumns[2]) ?? 0);
+            double thanhTien = Convert.ToDouble(gridView1.GetRowCellValue(rowHandle, gridView1.VisibleColumns[4]) ?? 0);
+
+            if (string.IsNullOrEmpty(tenMon)) return;
+            string lyDo = DevExpress.XtraEditors.XtraInputBox.Show(
+                $"Hủy {soLuong} [{tenMon}].\n\nNhập lý do để xác nhận (VD: Pha sai, Rơi vỡ...):",
+                "Ghi nhận thất thoát", "");
+            if (string.IsNullOrEmpty(lyDo)) return;
+
+            try
+            {
+                string tienChuan = thanhTien.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string insertWaste = $"INSERT INTO dbo.WasteLog (FoodName, Quantity, LossValue, Reason, StaffName) VALUES (N'{tenMon}', {soLuong}, {tienChuan}, N'{lyDo}', N'Admin')";
+                DataProvider.Instance.ExecuteNonQuery(insertWaste);
+                string deleteFood = $"DELETE FROM dbo.BillInfo WHERE BillId = {idHoaDon} AND FoodId IN (SELECT FoodId FROM dbo.Food WHERE FoodName = N'{tenMon}')";
+                DataProvider.Instance.ExecuteNonQuery(deleteFood);
+                LoadTable();
+                ShowBill(banHienTai.TableID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi CSDL: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

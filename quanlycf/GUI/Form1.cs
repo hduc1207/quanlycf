@@ -42,7 +42,7 @@ namespace QuanLyQuanCafe
             GUI.ucOrder uc = new GUI.ucOrder();
             uc.Dock = DockStyle.Fill;
             DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
-            tabMoi.Text = "Màn hình chính";
+            tabMoi.Text = "Màn hình order";
             tabMoi.Controls.Add(uc);
             tabHienThi.TabPages.Add(tabMoi);
             tabHienThi.SelectedTabPage = tabMoi;
@@ -171,6 +171,18 @@ namespace QuanLyQuanCafe
             tabMoi.Text = "Quản lý Voucher";
             tabMoi.Controls.Add(uc);
             tabHienThi.TabPages.Add(tabMoi);
+        }
+
+        private void btnThatThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            tabHienThi .TabPages.Clear();
+             GUI.ucWasteLog uc = new GUI.ucWasteLog();
+            uc.Dock = DockStyle.Fill;
+            DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
+            tabMoi.Text = "Thất thoát";
+            tabMoi.Controls.Add(uc);
+            tabHienThi.TabPages.Add(tabMoi);
+             tabHienThi.SelectedTabPage = tabMoi;
         }
     }
 }
