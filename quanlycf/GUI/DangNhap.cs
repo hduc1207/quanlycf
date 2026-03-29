@@ -100,6 +100,7 @@ namespace QuanLyQuanCafe.GUI
                 MessageBox.Show("Tên đăng nhập không tồn tại trong hệ thống!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             string emailNhan = AccountDAO.Instance.GetEmailByUserName(userName);
             if (string.IsNullOrEmpty(emailNhan))
             {
@@ -107,20 +108,29 @@ namespace QuanLyQuanCafe.GUI
                 return;
             }
             string randomPassword = Guid.NewGuid().ToString().Substring(0, 6).ToUpper();
-            bool isUpdated = AccountDAO.Instance.ResetPassword(userName, randomPassword);
-
-            if (isUpdated)
+            Cursor.Current = Cursors.WaitCursor;
+            bool isSent = SendEmailResetPassword(emailNhan, userName, randomPassword);
+            if (isSent)
             {
-                bool isSent = SendEmailResetPassword(emailNhan, userName, randomPassword);
+                bool isUpdated = AccountDAO.Instance.ResetPassword(userName, randomPassword);
 
-                if (isSent)
+                if (isUpdated)
                 {
                     string[] mailParts = emailNhan.Split('@');
                     string hiddenMail = mailParts[0].Substring(0, Math.Min(3, mailParts[0].Length)) + "***@" + mailParts[1];
 
-                    MessageBox.Show($"Đã gửi mật khẩu khôi phục về Email bảo mật ({hiddenMail}) của bạn.\nVui lòng kiểm tra hộp thư!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Đã gửi mật khẩu khôi phục về Email bảo mật ({hiddenMail}).\nVui lòng kiểm tra hộp thư!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Lỗi hệ thống! Không thể lưu mật khẩu mới vào cơ sở dữ liệu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            else
+            {
+                MessageBox.Show("Gửi Email thất bại. Mật khẩu của bạn vẫn được giữ nguyên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Cursor.Current = Cursors.Default;
         }
     }
 }

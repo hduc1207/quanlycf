@@ -79,7 +79,8 @@ namespace QuanLyQuanCafe.DAO
         {
             string hashedPassword = SecurityHelper.HashPassword(newPassword);
             string query = "UPDATE Account SET PassWord = @pass WHERE UserName = @userName";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { newPassword, userName });
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { hashedPassword, userName });
+
             return result > 0;
         }
 
@@ -119,8 +120,15 @@ namespace QuanLyQuanCafe.DAO
         public string GetEmailByUserName(string userName)
         {
             string query = "SELECT Email FROM dbo.Employee WHERE UserName = @userName";
-            object result = DataProvider.Instance.ExecuteScalar(query, new object[] { userName });
-            return (result != null && result != DBNull.Value) ? result.ToString() : "";
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { userName });
+
+            if (data.Rows.Count > 0 && data.Rows[0]["Email"] != DBNull.Value)
+            {
+                string encryptedEmail = data.Rows[0]["Email"].ToString();
+                return SecurityHelper.Decrypt(encryptedEmail);
+            }
+
+            return "";
         }
     }
 }
