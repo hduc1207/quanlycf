@@ -25,12 +25,10 @@ namespace QuanLyQuanCafe
             if (loaiTaiKhoan == 0)
             {
                 pageQuanLy.Visible = false;
-                pageThongTin.Visible = false;
             }
             else
             {
                 pageQuanLy.Visible = true;
-                pageThongTin.Visible = true;
             }
         }
 
@@ -88,7 +86,7 @@ namespace QuanLyQuanCafe
         private void barButtonItem_TaiKhoan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             tabHienThi.TabPages.Clear();
-            GUI.ucTaiKhoan uc = new GUI.ucTaiKhoan();
+            GUI.ucTaiKhoan uc = new GUI.ucTaiKhoan(loginAccount.Type == 1);
             uc.Dock = DockStyle.Fill;
             DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
             tabMoi.Text = "Quản lý Tài Khoản";
@@ -175,14 +173,25 @@ namespace QuanLyQuanCafe
 
         private void btnThatThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            tabHienThi .TabPages.Clear();
-             GUI.ucWasteLog uc = new GUI.ucWasteLog();
+            tabHienThi.TabPages.Clear();
+            GUI.ucWasteLog uc = new GUI.ucWasteLog();
             uc.Dock = DockStyle.Fill;
             DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
             tabMoi.Text = "Thất thoát";
             tabMoi.Controls.Add(uc);
             tabHienThi.TabPages.Add(tabMoi);
-             tabHienThi.SelectedTabPage = tabMoi;
+            tabHienThi.SelectedTabPage = tabMoi;
+        }
+
+        private void btnTTNhanVien_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            tabHienThi .TabPages.Clear();
+            GUI.ucEmployee uc = new GUI.ucEmployee();
+            uc.Dock = DockStyle.Fill;
+            DevExpress.XtraTab.XtraTabPage tabMoi = new DevExpress.XtraTab.XtraTabPage();
+            tabMoi.Text = "Thông tin nhân viên";
+            tabMoi.Controls.Add(uc);
+            tabHienThi.TabPages.Add(tabMoi);
         }
     }
 }

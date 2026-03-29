@@ -34,12 +34,10 @@ namespace QuanLyQuanCafe.DAO
             return result > 0;
         }
         //3. Sửa nhân viên
-        public bool UpdateEmployee(int id, string fullName, string phone, string address, DateTime birthDate)
+        public bool UpdateEmployee(int id, string fullName, string phone, string address, string email, DateTime birthDate)
         {
-            string query = string.Format("UPDATE Employee SET FullName = N'{0}', PhoneNumber = '{1}', Address = N'{2}', BirthDate = '{3}' WHERE EmployeeId = {4}", fullName, phone, address, birthDate, id);
-            int result = DataProvider.Instance.ExecuteNonQuery(query);
-
-            return result > 0;
+            string query = string.Format("UPDATE Employee SET FullName = N'{0}', PhoneNumber = '{1}', Address = N'{2}', BirthDate = '{3}', Email = N'{4}' WHERE EmployeeId = {5}", fullName, phone, address, birthDate, email, id);
+            return DataProvider.Instance.ExecuteNonQuery(query) > 0;
         }
 
         //4. Xóa nhân viên
@@ -53,12 +51,12 @@ namespace QuanLyQuanCafe.DAO
         public List<EmployeeDTO> SearchEmployeeByName(string name)
         {
             List<EmployeeDTO> list = new List<EmployeeDTO>();
-            string query = string.Format("SELECT * FROM Employee WHERE dbo.fuConvertToUnsign1(FullName) LIKE N'%' + dbo.fuConvertToUnsign1(N'{0}') + '%'", name);
+            string query = "SELECT * FROM Employee";
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             foreach (DataRow item in data.Rows)
             {
-                EmployeeDTO employee = new EmployeeDTO(item);
+                EmployeeDTO employee = new EmployeeDTO(item, true);
                 list.Add(employee);
             }
             return list;

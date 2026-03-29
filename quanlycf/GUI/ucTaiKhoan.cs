@@ -10,14 +10,16 @@ namespace QuanLyQuanCafe.GUI
 {
     public partial class ucTaiKhoan : DevExpress.XtraEditors.XtraUserControl
     {
-        public ucTaiKhoan()
+        private bool _isCurrentLoginAdmin;
+        public ucTaiKhoan(bool isAdmin)
         {
             InitializeComponent();
+            _isCurrentLoginAdmin = isAdmin;
             LoadAccountList();
         }
         void LoadAccountList()
         {
-            List<AccountDTO> listAccount = AccountBUS.Instance.GetListAccount();
+            List<AccountDTO> listAccount = AccountBUS.Instance.GetListAccount(_isCurrentLoginAdmin);
             gridControl1.DataSource = new BindingList<AccountDTO>(listAccount);
             if (gridView1.Columns["FullName"] != null)
             {
